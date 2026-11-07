@@ -1,0 +1,917 @@
+<title>Sameh Ayman Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Sameh Ayman — Geospatial & Digital Twin Consultant. Mobile Mapping, LiDAR, GIS, BIM-GIS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,700;112,800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Kufi+Arabic:wght@600;800&display=swap">
+<style>
+/* Layout: a survey drawing sheet — hero with live point cloud, a title block, then case-study rows set like sheet panels */
+:root{
+  --paper:#F2F4F3; --sheet:#FFFFFF; --ink:#12222A; --muted:#55666D; --line:#CBD5D3;
+  --accent:#D85E26; --data:#1D7069; --fill-bg:#FFF1E8;
+  --f-display:"Archivo","Noto Kufi Arabic",system-ui,sans-serif;
+  --f-display-ar:"Noto Kufi Arabic","Archivo",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --s1:.8125rem; --s2:.9375rem; --s3:1.0625rem; --s4:1.375rem; --s5:clamp(1.6rem,3vw,2.1rem); --s6:clamp(2.3rem,6vw,4.2rem);
+  --wrap:1180px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0D161A; --sheet:#132026; --ink:#E2EBE9; --muted:#93A5A9; --line:#2A3B41;
+  --accent:#F08A4E; --data:#55B5AA; --fill-bg:#2B1D15; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0D161A; --sheet:#132026; --ink:#E2EBE9; --muted:#93A5A9; --line:#2A3B41;
+  --accent:#F08A4E; --data:#55B5AA; --fill-bg:#2B1D15; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:var(--s3);line-height:1.65;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-stretch:112%;line-height:1.1;margin:0;text-wrap:balance;letter-spacing:-.01em}
+:root[dir="rtl"] h1,:root[dir="rtl"] h2,:root[dir="rtl"] h3{font-family:var(--f-display-ar);letter-spacing:0;line-height:1.35}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.mono{font-family:var(--f-mono);font-size:var(--s1);letter-spacing:.04em}
+.label{font-family:var(--f-mono);font-size:var(--s1);text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+
+/* bilingual */
+.ar{display:none}
+:root[dir="rtl"] .ar{display:revert}
+:root[dir="rtl"] .en{display:none}
+
+/* placeholders the owner still has to fill */
+.fill{background:var(--fill-bg);border-bottom:1px dashed var(--accent);padding-inline:.2em;border-radius:2px}
+
+/* nav */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:20px;padding-block:12px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600}
+.mark svg{flex:none}
+nav.links{display:flex;gap:18px;margin-inline-start:auto;font-size:var(--s2)}
+nav.links a{text-decoration:none;color:var(--muted)}
+nav.links a:hover{color:var(--ink)}
+.lang{font:500 var(--s1)/1 var(--f-mono);border:1px solid var(--ink);background:transparent;color:var(--ink);padding:8px 12px;border-radius:2px;cursor:pointer}
+.lang:hover{background:var(--ink);color:var(--paper)}
+@media (max-width:820px){nav.links{display:none}.lang{margin-inline-start:auto}}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;padding-block:56px 32px}
+.hero .copy{display:grid;gap:22px;min-width:0}
+.hero h1{font-size:var(--s6);font-weight:800}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{font-size:var(--s4);line-height:1.5;color:var(--muted);max-width:34ch}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:2px;text-decoration:none;font-weight:600;font-size:var(--s2);border:1px solid var(--ink)}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.cloud{position:relative;aspect-ratio:5/4;max-width:100%;border:1px solid var(--line);background:var(--sheet)}
+.cloud canvas{width:100%;height:100%;display:block}
+.cloud .tick{position:absolute;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.cloud .t1{top:8px;inset-inline-start:10px}.cloud .t2{bottom:8px;inset-inline-end:10px}
+.cloud .legend{position:absolute;bottom:10px;inset-inline-start:10px;display:flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.cloud .legend i{width:70px;height:6px;background:linear-gradient(90deg,#2b59c3,#2bb3a3,#9bd34a,#f2c94c,#e2572b)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-block:36px 24px}}
+
+/* title block */
+.tblock{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--ink);background:var(--sheet);margin-block:8px 72px}
+.tblock div{padding:12px 14px;border-inline-end:1px solid var(--line);min-width:0}
+.tblock div:last-child{border-inline-end:0}
+.tblock b{display:block;font-weight:600;font-size:var(--s2);margin-top:2px}
+@media (max-width:820px){.tblock{grid-template-columns:1fr 1fr}.tblock div{border-bottom:1px solid var(--line)}.tblock div:last-child{grid-column:1/-1}}
+
+/* sections */
+section{padding-block:24px 80px}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:baseline;margin-bottom:36px;border-top:2px solid var(--ink);padding-top:16px}
+.sec-head h2{font-size:var(--s5)}
+.sec-head p{color:var(--muted);max-width:62ch;margin-top:10px}
+@media (max-width:720px){.sec-head{grid-template-columns:1fr;gap:6px}}
+
+/* about */
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+.about .txt{display:grid;gap:16px;max-width:64ch;min-width:0}
+.facts{display:grid;gap:0;align-content:start;border-top:1px solid var(--line)}
+.facts div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.facts dt{color:var(--muted);font-size:var(--s2)}
+.facts dd{margin:0;font-weight:600;text-align:end;font-size:var(--s2)}
+@media (max-width:820px){.about{grid-template-columns:1fr}}
+
+/* expertise */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.skill{background:var(--sheet);padding:24px;display:grid;gap:10px;align-content:start;min-width:0}
+.skill .code{font-family:var(--f-mono);font-size:var(--s1);color:var(--data);font-weight:500}
+.skill h3{font-size:1.15rem}
+.skill p{color:var(--muted);font-size:var(--s2)}
+@media (max-width:900px){.skills{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.skills{grid-template-columns:1fr}}
+
+/* projects */
+.projects{display:grid;gap:64px}
+.proj{display:grid;grid-template-columns:1.25fr 1fr;gap:36px;align-items:start}
+.proj:nth-child(even) .gallery{order:2}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:8px;min-width:0}
+.gallery .main{grid-column:1/-1}
+.shot{margin:0;position:relative;border:1px solid var(--line);background:var(--sheet);overflow:hidden}
+.shot.main{aspect-ratio:16/10}
+.shot:not(.main){aspect-ratio:4/3}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot.sheet{background:#fff}.shot.sheet img{object-fit:contain}
+.shot.main.sheet{aspect-ratio:1.414}
+.shot.sheet img[src*="-pro-"]{background:#0b1a22}
+.shot.sheet:has(img[src*="-pro-"]){background:#0b1a22}
+.shot.main:has(img[src*="-pro-"]){aspect-ratio:16/9}.shot:has(img[src*="-pro-"]) img{object-fit:contain;background:#0b1a22}
+.shot .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:12px}
+.shot .ph span{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--muted);background:var(--sheet);padding:4px 8px;border:1px dashed var(--line)}
+.shot figcaption{position:absolute;inset-inline-start:0;bottom:0;font-family:var(--f-mono);font-size:11px;background:var(--ink);color:var(--paper);padding:3px 8px}
+/* placeholder textures, one per data type */
+.ph[data-k="cloud"]{background:radial-gradient(circle at 30% 60%,color-mix(in srgb,var(--data) 30%,transparent) 0 1.2px,transparent 1.6px) 0 0/9px 7px,radial-gradient(circle,color-mix(in srgb,var(--accent) 28%,transparent) 0 1px,transparent 1.4px) 3px 2px/13px 11px}
+.ph[data-k="contour"]{background:repeating-radial-gradient(ellipse at 35% 55%,transparent 0 14px,color-mix(in srgb,var(--data) 35%,transparent) 14px 15px)}
+.ph[data-k="cad"]{background:linear-gradient(color-mix(in srgb,var(--muted) 18%,transparent) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,color-mix(in srgb,var(--muted) 18%,transparent) 1px,transparent 1px) 0 0/24px 24px}
+.ph[data-k="map"]{background:linear-gradient(115deg,transparent 46%,color-mix(in srgb,var(--accent) 40%,transparent) 46% 48%,transparent 48%),linear-gradient(25deg,transparent 60%,color-mix(in srgb,var(--data) 30%,transparent) 60% 61%,transparent 61%),repeating-linear-gradient(0deg,transparent 0 30px,color-mix(in srgb,var(--muted) 12%,transparent) 30px 31px)}
+.ph[data-k="bim"]{background:linear-gradient(135deg,transparent 40%,color-mix(in srgb,var(--data) 22%,transparent) 40% 60%,transparent 60%),repeating-linear-gradient(90deg,transparent 0 40px,color-mix(in srgb,var(--muted) 15%,transparent) 40px 41px)}
+.ph[data-k="chart"]{background:linear-gradient(0deg,color-mix(in srgb,var(--data) 30%,transparent) 0 40%,transparent 40%) 10% 100%/14% 100% no-repeat,linear-gradient(0deg,color-mix(in srgb,var(--data) 30%,transparent) 0 65%,transparent 65%) 32% 100%/14% 100% no-repeat,linear-gradient(0deg,color-mix(in srgb,var(--accent) 35%,transparent) 0 52%,transparent 52%) 54% 100%/14% 100% no-repeat,linear-gradient(0deg,color-mix(in srgb,var(--data) 30%,transparent) 0 80%,transparent 80%) 76% 100%/14% 100% no-repeat}
+.ptext{display:grid;gap:18px;min-width:0}
+.ptext .meta{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.tag{font-family:var(--f-mono);font-size:var(--s1);font-weight:500;color:var(--paper);background:var(--data);padding:2px 8px;border-radius:2px}
+.ptext h3{font-size:var(--s4)}
+.ptext p{color:var(--muted)}
+.ptext dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0;font-size:var(--s2);border-top:1px solid var(--line);padding-top:14px}
+.ptext dt{font-family:var(--f-mono);font-size:var(--s1);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding-top:2px}
+:root[dir="rtl"] .ptext dt{text-transform:none;letter-spacing:0;font-family:var(--f-body)}
+.ptext dd{margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:var(--s1);border:1px solid var(--line);padding:2px 8px;border-radius:2px;background:var(--sheet)}
+@media (max-width:860px){.proj{grid-template-columns:1fr}.proj:nth-child(even) .gallery{order:0}}
+
+/* experience */
+.timeline{display:grid;gap:0;border-inline-start:2px solid var(--ink);margin-inline-start:6px}
+.job{position:relative;padding:0 0 32px 28px;display:grid;gap:6px;max-width:72ch}
+:root[dir="rtl"] .job{padding:0 28px 32px 0}
+.job::before{content:"";position:absolute;inset-inline-start:-8px;top:6px;width:14px;height:14px;background:var(--paper);border:2px solid var(--accent);transform:rotate(45deg)}
+.job h3{font-size:1.15rem}
+.job .where{color:var(--muted);font-size:var(--s2)}
+.job ul{margin:6px 0 0;padding-inline-start:18px;color:var(--muted);font-size:var(--s2);display:grid;gap:4px}
+
+/* tools + credentials */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.toolgrid{display:grid;gap:18px}
+.toolgrid h3{font-family:var(--f-mono);font-size:var(--s1);font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+:root[dir="rtl"] .toolgrid h3{font-family:var(--f-body);text-transform:none;letter-spacing:0}
+.creds{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--line)}
+.creds li{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.creds b{font-weight:600}
+.creds small{display:block;color:var(--muted);font-size:var(--s2)}
+.creds .mono{color:var(--muted);align-self:center}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+
+/* contact */
+.contact{background:var(--ink);color:var(--paper)}
+.contact .wrap{padding-block:64px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end}
+.contact h2{font-size:var(--s6);font-weight:800}
+.contact p{color:color-mix(in srgb,var(--paper) 70%,transparent);margin-top:14px;max-width:46ch}
+.clist{display:grid;gap:0;border-top:1px solid color-mix(in srgb,var(--paper) 25%,transparent)}
+.clist div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid color-mix(in srgb,var(--paper) 25%,transparent);min-width:0}
+.clist .label{color:color-mix(in srgb,var(--paper) 60%,transparent)}
+.clist a,.clist span.v{font-weight:600;overflow-wrap:anywhere;text-align:end}
+.contact .fill{background:transparent;color:var(--accent)}
+footer{padding-block:20px;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:820px){.contact .wrap{grid-template-columns:1fr}}
+
+/* featured case study + viewer */
+.courses{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.ptext .note{font-size:13px;color:var(--muted);font-style:italic}
+.course{background:var(--sheet);border:1px solid var(--line);padding:28px;display:grid;gap:14px;align-content:start;min-width:0}
+.course .mono{color:var(--data)}
+.course h3{font-size:var(--s4)}
+.course ol{margin:0;padding-inline-start:22px;display:grid;gap:6px;color:var(--muted);font-size:var(--s2)}
+.shot video{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:820px){.courses{grid-template-columns:1fr}}
+
+.reel{margin:0;display:grid;gap:8px;max-width:960px}
+.reel video{width:100%;max-width:100%;aspect-ratio:16/9;display:block;background:var(--ink);border:1px solid var(--line)}
+.reel figcaption{font-family:var(--f-mono);font-size:var(--s1);color:var(--muted)}
+
+.proj-feature{grid-template-columns:1fr;gap:28px}
+.proj-feature .gallery{grid-template-columns:repeat(3,1fr)}
+.proj.early{grid-template-columns:1fr}
+.proj.early .ptext p{max-width:80ch}
+.ptext .btn{justify-self:start}
+.proj-feature .ptext{grid-template-columns:1.3fr 1fr;column-gap:40px;align-items:start}
+.proj-feature .ptext>.meta,.proj-feature .ptext>h3{grid-column:1/-1}
+.shot img{cursor:zoom-in;transition:transform .4s ease}
+.shot:hover img{transform:scale(1.03)}
+@media (max-width:860px){.proj-feature .gallery{grid-template-columns:1fr 1fr}.proj-feature .ptext{grid-template-columns:1fr}}
+.viewer{position:fixed;inset:0;z-index:50;background:rgba(8,14,17,.92);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.viewer img{max-width:100%;max-height:82vh;object-fit:contain;cursor:zoom-out}
+.viewer p{color:#E2EBE9;font-family:var(--f-mono);font-size:var(--s1);margin-top:12px;text-align:center}
+.viewer button{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));inset-inline-end:calc(16px + env(safe-area-inset-right,0px));background:none;border:1px solid #E2EBE9;color:#E2EBE9;font:500 var(--s1) var(--f-mono);padding:8px 12px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* quick / full view */
+.hl{padding:40px 0 24px}
+.jump{display:flex;flex-wrap:wrap;gap:10px;margin:-8px 0 36px}
+.jump a{display:inline-flex;align-items:center;gap:10px;padding:9px 14px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--ink);font-size:var(--s2);background:var(--sheet)}
+.jump a:hover{border-color:var(--accent)}
+.jump b{font-family:var(--f-mono);font-size:var(--s1);color:var(--accent)}
+article[id^="p-"]{scroll-margin-top:84px}
+.full-only{scroll-margin-top:70px}
+.more-panel{margin-top:72px;display:flex;gap:28px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:30px 32px;background:var(--sheet);border:1px solid var(--line);border-inline-start:4px solid var(--accent);border-radius:4px}
+.more-panel h3{margin:6px 0 6px;font-size:1.5rem}
+.more-panel p{margin:0;color:var(--muted);max-width:62ch}
+.more-cta{display:flex;gap:12px;flex-wrap:wrap}
+button.btn{font:inherit;font-weight:600;font-size:var(--s2);cursor:pointer}
+.mode{display:inline-flex;border:1px solid var(--ink);border-radius:2px;overflow:hidden;margin-inline-start:6px}
+.mode button{font:500 var(--s1)/1 var(--f-mono);background:transparent;color:var(--ink);border:0;padding:8px 11px;cursor:pointer}
+.mode button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.v-short .full-only{display:none}
+.v-full .short-only{display:none}
+.v-full .full-only{animation:reveal .6s ease both}
+@keyframes reveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.v-full .full-only{animation:none}}
+@media (max-width:820px){.mode{margin-inline-start:auto}.mode+.lang{margin-inline-start:0}.more-panel{padding:22px}}
+.viewer[hidden]{display:none!important}
+.mark{white-space:nowrap}
+.quick-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px}
+.quick-links a{display:inline-flex;align-items:center;gap:7px;color:var(--muted);text-decoration:none;font-size:var(--s2)}
+.quick-links a:hover{color:var(--accent)}
+.cred-strip{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.cred-strip li{display:flex;flex-direction:column;padding:8px 12px;border:1px solid var(--line);border-radius:3px;background:var(--sheet);font-size:var(--s2);line-height:1.3}
+.cred-strip li span{color:var(--muted);font-size:var(--s1)}
+</style>
+
+<script>document.documentElement.classList.add(location.hash==="#full"?"v-full":"v-short")</script>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Sameh Ayman">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M13 2v22M2 13h22" stroke="currentColor" stroke-width="1"/><circle cx="13" cy="13" r="3" fill="var(--accent)"/></svg>
+      <span class="en">Sameh Ayman</span><span class="ar">سامح أيمن</span>
+    </a>
+    <nav class="links" aria-label="Sections">
+      <a href="#about"><span class="en">About</span><span class="ar">نبذة</span></a>
+      <a href="#expertise"><span class="en">Expertise</span><span class="ar">الخبرات</span></a>
+      <a href="#work"><span class="en">Work</span><span class="ar">الأعمال</span></a>
+      <a href="#training"><span class="en">Teaching</span><span class="ar">التدريس</span></a>
+      <a href="#experience"><span class="en">Experience</span><span class="ar">المسيرة</span></a>
+      <a href="#contact"><span class="en">Contact</span><span class="ar">تواصل</span></a>
+    </nav>
+    <div class="mode" role="group" aria-label="View">
+      <button type="button" data-mode="short"><span class="en">Quick</span><span class="ar">مختصر</span></button>
+      <button type="button" data-mode="full"><span class="en">Full</span><span class="ar">كامل</span></button>
+    </div>
+    <button class="lang" id="langBtn" type="button" aria-label="Switch language"><span class="en">عربي</span><span class="ar">English</span></button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div class="copy">
+        <p class="label"><span class="en">Geospatial &amp; Digital Twin Consultant</span><span class="ar">استشاري المعلومات المكانية والتوائم الرقمية</span></p>
+        <h1><span class="en">From raw <em>point clouds</em> to decisions people can act on.</span><span class="ar">من <em>سحابة النقاط</em> الخام إلى قرارات يمكن البناء عليها.</span></h1>
+        <p class="lede"><span class="en">10+ years in land surveying, Mobile Mapping, LiDAR and GIS across Saudi Arabia and Egypt.</span><span class="ar">أكثر من 10 سنوات في المساحة والمسح المتنقل والليدار ونظم المعلومات الجغرافية في السعودية ومصر.</span></p>
+        <div class="cta">
+          <a class="btn primary" href="#featured"><span class="en">See selected work</span><span class="ar">نماذج الأعمال</span> <span aria-hidden="true">→</span></a>
+          <a class="btn ghost" href="images/Sameh-Ayman-CV.pdf" target="_blank" rel="noopener" data-cv><span class="en">Download CV</span><span class="ar">تحميل السيرة الذاتية</span> <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="quick-links">
+          <a href="https://wa.me/966509703982?text=Hello%20Sameh%2C%20I%20saw%20your%20portfolio" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3z"/></svg><span dir="ltr">+966 50 970 3982</span></a>
+          <a href="https://wa.me/201092253958?text=Hello%20Sameh%2C%20I%20saw%20your%20portfolio" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3z"/></svg><span dir="ltr">+20 109 225 3958</span></a>
+          <a href="https://www.linkedin.com/in/sameh-ayman-gis" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1a4.2 4.2 0 0 1 3.8-2c4 0 4.8 2.7 4.8 6.1V21h-4v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H9z"/></svg><span>LinkedIn</span></a>
+          <a href="mailto:samehayman.gis@gmail.com?subject=Project%20enquiry" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg><span>samehayman.gis@gmail.com</span></a>
+        </div>
+      </div>
+      <div class="cloud" aria-label="Illustrative LiDAR point cloud of a road corridor, coloured by elevation">
+        <canvas id="pc"></canvas>
+        <span class="tick t1">E 674 210 · N 2 734 880</span>
+        <span class="tick t2">UTM 38N</span>
+        <span class="legend"><i></i>Z</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="tblock" role="list">
+      <div role="listitem"><span class="label"><span class="en">Discipline</span><span class="ar">التخصص</span></span><b><span class="en">Geomatics · GIS</span><span class="ar">الجيوماتكس · GIS</span></b></div>
+      <div role="listitem"><span class="label"><span class="en">Experience</span><span class="ar">الخبرة</span></span><b><span class="en">10+ years</span><span class="ar">+10 سنوات</span></b></div>
+      <div role="listitem"><span class="label"><span class="en">Based in</span><span class="ar">المقر</span></span><b><span class="en">Saudi Arabia</span><span class="ar">السعودية</span></b></div>
+      <div role="listitem"><span class="label"><span class="en">Datum</span><span class="ar">المرجع</span></span><b>WGS 84 · KSA-GRF17</b></div>
+      <div role="listitem"><span class="label"><span class="en">Status</span><span class="ar">الحالة</span></span><b><span class="en">Open to consulting</span><span class="ar">متاح للاستشارات</span></b></div>
+    </div>
+    <ul class="cred-strip" aria-label="Credentials">
+      <li><b><span class="en">Licensed drone pilot</span><span class="ar">طيار درون مرخّص</span></b><span><span class="en">GACA Remote Pilot Certificate · Open</span><span class="ar">رخصة الطيار عن بُعد من هيئة الطيران المدني</span></span></li>
+      <li><b><span class="en">Saudi Council of Engineers</span><span class="ar">الهيئة السعودية للمهندسين</span></b><span><span class="en">Member</span><span class="ar">عضو</span></span></li>
+      <li><b>PMI</b><span><span class="en">Member · PMP candidate</span><span class="ar">عضو · مرشح PMP</span></span></li>
+      <li><b><span class="en">Diploma in GIS</span><span class="ar">دبلوم نظم المعلومات الجغرافية</span></b><span><span class="en">Ain Shams University</span><span class="ar">جامعة عين شمس</span></span></li>
+      <li><b><span class="en">B.A. Geography</span><span class="ar">بكالوريوس الجغرافيا</span></b><span><span class="en">Zagazig University</span><span class="ar">جامعة الزقازيق</span></span></li>
+      <li><b>FIG Working Week</b><span><span class="en">Work presented · South Africa</span><span class="ar">عرض أعمال · جنوب أفريقيا</span></span></li>
+    </ul>
+  </div>
+
+  <!-- FEATURED (quick view) -->
+  <section class="hl" id="featured">
+    <div class="wrap">
+      <div class="sec-head"><span class="label"><span class="en">Start here</span><span class="ar">ابدأ من هنا</span></span><div><h2><span class="en">Three projects in two minutes</span><span class="ar">ثلاثة مشاريع في دقيقتين</span></h2><p><span class="en">The short version: each project with its film, drawings and the numbers behind it.</span><span class="ar">النسخة المختصرة: كل مشروع بفيلمه ولوحاته والأرقام التي بُني عليها.</span></p></div></div>
+      <nav class="jump" aria-label="Featured projects">
+        <a href="#p-twin"><b>01</b><span class="en">Digital twin · 3D GIS</span><span class="ar">التوأم الرقمي · GIS ثلاثي الأبعاد</span></a>
+        <a href="#p-water"><b>02</b><span class="en">Utility networks</span><span class="ar">شبكات المرافق</span></a>
+        <a href="#p-c3d"><b>03</b><span class="en">Civil 3D · quantities</span><span class="ar">Civil 3D · حصر الكميات</span></a>
+      </nav>
+      <div class="projects">
+        <article id="p-twin" class="proj proj-feature">
+          <figure class="reel"><video src="images/twin-reel.mp4" poster="images/reel-poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Project walkthrough: point cloud, feature extraction, BIM, above-ground and underground utility models"></video><figcaption><span class="en">Project walkthrough · 81 s · point cloud → BIM → 3D utilities</span><span class="ar">جولة في المشروع · 81 ثانية · من سحابة النقاط إلى BIM ثم المرافق ثلاثية الأبعاد</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main"><img src="images/twin-aerial.jpg" alt="Aerial view of the coordinated 3D city model on a GIS basemap" loading="lazy"><figcaption>3D GIS scene · Basemap: Esri, OpenStreetMap</figcaption></figure>
+            <figure class="shot"><img src="images/twin-pointcloud.jpg" alt="MMS point cloud of a city block" loading="lazy"><figcaption>1 · Point cloud</figcaption></figure>
+            <figure class="shot"><img src="images/twin-bim.jpg" alt="BIM model of the same block built from the point cloud" loading="lazy"><figcaption>2 · BIM model</figcaption></figure>
+            <figure class="shot"><img src="images/twin-utilities.jpg" alt="Underground utility networks shown beneath the street" loading="lazy"><figcaption>3 · Underground utilities</figcaption></figure>
+            <figure class="shot"><img src="images/twin-intersection.jpg" alt="Intersection with water, sewer and telecom lines and manholes" loading="lazy"><figcaption>4 · Conflict check</figcaption></figure>
+            <figure class="shot"><img src="images/twin-attributes.jpg" alt="Street view with labelled manholes and pipe diameters" loading="lazy"><figcaption>5 · Asset attributes</figcaption></figure>
+            <figure class="shot"><img src="images/twin-city.jpg" alt="Bird's-eye view of the 3D city model" loading="lazy"><figcaption>6 · City context</figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">TWIN</span><span class="mono">Alqotr Engineering Consulting · 2025</span></div>
+            <h3><span class="en">3D city model &amp; digital twin integration</span><span class="ar">نموذج مدينة ثلاثي الأبعاد وتكامل التوأم الرقمي</span></h3>
+            <p><span class="en">Building models created from MMS point clouds and Autodesk Revit were brought into one 3D GIS scene with AutoCAD utilities, surface features and underground utilities detected by GPR. The result let engineers see what sits above and below ground together and find spatial conflicts before construction. The visualisations were presented at the FIG Working Week in South Africa.</span><span class="ar">دمجتُ نماذج المباني المنتجة من سحب نقاط المسح المتنقل ومن Autodesk Revit في مشهد GIS ثلاثي الأبعاد واحد، مع المرافق والعناصر السطحية من AutoCAD والمرافق تحت الأرض المكتشفة بالرادار الأرضي GPR. أتاح ذلك للمهندسين رؤية ما فوق الأرض وما تحتها معاً واكتشاف التعارضات قبل التنفيذ. وعُرضت هذه المخرجات في أسبوع عمل FIG بجنوب أفريقيا.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Integration lead: data conversion, georeferencing, 3D scene, visual outputs</span><span class="ar">قائد التكامل: تحويل البيانات والإسناد الجغرافي والمشهد ثلاثي الأبعاد والمخرجات المرئية</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Coordinated 3D city model, conflict views, conference visuals</span><span class="ar">نموذج مدينة منسق، مشاهد التعارضات، مواد العرض في المؤتمر</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>ArcScene</span><span>ArcGIS Pro</span><span>Revit</span><span>AutoCAD</span><span>GPR</span></dd>
+            </dl>
+          </div>
+        </article>
+
+        <article id="p-water" class="proj proj-feature">
+          <figure class="reel"><video src="images/water.mp4" poster="images/water-pro-serve.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Water distribution network case-study film: raw data, network build, house connections, topology validation, hydrant coverage, field condition and inventory"></video><figcaption><span class="en">Case-study film · 2 min · with sound</span><span class="ar">فيلم المشروع · دقيقتان · بالصوت</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main"><img src="images/water-pro-serve.jpg" alt="Water mains, service laterals and meters over satellite imagery, connected buildings in blue and unconnected ones in amber" loading="lazy"><figcaption><span class="en">Network serving the buildings</span><span class="ar">الشبكة وتغذية المباني</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/water-pro-layers.jpg" alt="Exploded layer stack: imagery, parcels, buildings, mains, house connections, valves and hydrants" loading="lazy"><figcaption><span class="en">Imagery + network layers</span><span class="ar">المرئيات وطبقات الشبكة</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/water-pro-junctions.jpg" alt="Pipe intersections marked as tees, crossings and dead ends with diameter labels" loading="lazy"><figcaption><span class="en">Lines &amp; intersections</span><span class="ar">الخطوط والتقاطعات</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/water-pro-isolation.jpg" alt="Pipe break traced to the four valves to close and the properties without water" loading="lazy"><figcaption><span class="en">Emergency isolation</span><span class="ar">العزل في الطوارئ</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/water-pro-resupply.jpg" alt="Rest of the network re-supplied through loops after the closure" loading="lazy"><figcaption><span class="en">Re-supply through loops</span><span class="ar">إعادة التغذية عبر الحلقات</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/water-pro-hydrants.jpg" alt="Hydrant coverage with 122 m circles and proposed new hydrant sites" loading="lazy"><figcaption><span class="en">Hydrant coverage</span><span class="ar">تغطية الحنفيات</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/water-pro-topology.jpg" alt="Topology flags reviewed across a water network over imagery" loading="lazy"><figcaption><span class="en">Topology validation</span><span class="ar">التحقق الطبولوجي</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/water-survey-sheet.jpg" alt="Real A0 topographic survey sheet of the network area with key plan and legend; project names and logos removed" loading="lazy"><figcaption><span class="en">Real survey sheet · A0 (names removed)</span><span class="ar">لوحة رفع حقيقية · A0 (بدون أسماء)</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">WATER</span><span class="mono">AJC · 2023 – 2024</span></div>
+            <h3><span class="en">Water distribution networks</span><span class="ar">شبكات توزيع المياه</span></h3>
+            <p><span class="en">A long-running project where I took water networks from raw inputs to an analysis-ready GIS. I received survey points, building footprints, field inspection forms and as-built drawings, then built the network to engineering rules: 44 km of mains with the diameter hierarchy kept from source to ends (75 to 400 mm), and every pipe snapped at nodes. I generated all 1,646 house connections automatically (Add XY → Near → XY To Line), and validated a second network with geodatabase topology: 2,672 flags reviewed one by one, 2,594 confirmed as valid cases and 78 sent for correction. On top of the network I ran the analysis: a fire-hydrant coverage screen (only 19% of buildings within 122 m of a hydrant, 9% counting working hydrants only, and 36 proposed sites to reach 90%), a valve and hydrant condition layer from the field inspection, and full asset inventories. Over satellite imagery of the same district I reviewed all 1,020 pipe intersections (tees, crossings and dead ends), mapped how mains and laterals reach each building (1,540 footprints connected, 453 flagged for connection planning), and modelled emergencies: for a pipe break the trace finds the 4 valves to close, isolates 332 m of main and 14 properties, and confirms the rest of the network stays supplied through its loops.</span><span class="ar">مشروع طويل نقلت فيه شبكات المياه من البيانات الخام إلى نظام معلومات جغرافية جاهز للتحليل. استلمت نقاط الرفع المساحي وحدود المباني ونماذج الفحص الميداني ومخططات التنفيذ، ثم بنيت الشبكة وفق المعايير الهندسية: 44 كم من الخطوط الرئيسية مع الحفاظ على تدرج الأقطار من المصدر إلى الأطراف (75 إلى 400 مم)، وربط كل أنبوب عند العقد. أنشأت التوصيلات المنزلية كلها (1,646 توصيلة) آلياً بأدوات Add XY ثم Near ثم XY To Line، وتحققت من شبكة ثانية بقواعد الطبولوجيا: راجعت 2,672 ملاحظة واحدة واحدة، فثبت أن 2,594 منها حالات صحيحة وأُحيلت 78 للتصحيح. وعلى الشبكة أجريت التحليلات: فحص تغطية حنفيات الحريق (19% فقط من المباني ضمن 122 م من حنفية، و9% إذا احتُسبت الحنفيات العاملة وحدها، مع 36 موقعاً مقترحاً للوصول إلى 90%)، وطبقة لحالة المحابس والحنفيات من الفحص الميداني، وجداول حصر الأصول كاملة. وعلى المرئيات الفضائية للحي نفسه راجعت تقاطعات الخطوط كلها (1,020 تقاطعاً بين T وتقاطع كامل ونهايات مفتوحة)، ووضّحت كيف تصل الخطوط والوصلات إلى كل مبنى (1,540 مبنى موصولاً و453 محددة لتخطيط التوصيل)، وحلّلت حالات الطوارئ: عند كسر خط يحدد التتبع المحابس الأربعة الواجب إغلاقها، ويعزل 332 م من الخط و14 عقاراً، ويتأكد أن باقي الشبكة يبقى مغذّى عبر حلقاتها.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Data intake, network build to standards, automated connections, topology QC, analysis and outputs</span><span class="ar">استلام البيانات، بناء الشبكة وفق المعايير، التوصيلات الآلية، فحص الطبولوجيا، التحليل والمخرجات</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Validated network geodatabase, topology report, hydrant coverage gap map, condition layer, inventories</span><span class="ar">قاعدة بيانات شبكة معتمدة، تقرير الطبولوجيا، خريطة فجوات تغطية الحريق، طبقة الحالة، جداول الحصر</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>ArcGIS</span><span>Water Utility tools</span><span>Geodatabase topology</span><span>Attribute Assistant</span><span>Network analysis</span></dd>
+            </dl>
+          </div>
+        </article>
+
+        <article id="p-c3d" class="proj proj-feature">
+          <figure class="reel"><video src="images/c3d-qto.mp4" poster="images/c3d-pro-cutfill.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Civil 3D earthworks film: site, field survey points, TIN and grid surface, contours, slope and drainage, 3D terrain, platform and access road design, cut and fill, cross sections, road profile and quantities"></video><figcaption><span class="en">Workflow film · 1 min 48 s · with sound</span><span class="ar">فيلم سير العمل · دقيقة و48 ثانية · بالصوت</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main sheet"><img src="images/c3d-06-grading.jpg" alt="Grading plan sheet: platform at finished level, access road with stations, finished-grade contours, daylight lines and sample lines" loading="lazy"><figcaption><span class="en">Grading plan · C3D-06</span><span class="ar">لوحة التسوية · C3D-06</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-01-survey.jpg" alt="Topographic survey sheet with coded field points, roads, buildings, trees and a point list" loading="lazy"><figcaption><span class="en">Survey points &amp; codes</span><span class="ar">نقاط الرفع والأكواد</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-02-tin.jpg" alt="Existing ground TIN with detail of triangles and spot heights, plus a 10 m grid surface" loading="lazy"><figcaption><span class="en">TIN &amp; grid surface</span><span class="ar">سطح TIN والشبكية</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-03-contours.jpg" alt="Contour plan with 1 m minor and 5 m major contours and summit spot heights" loading="lazy"><figcaption><span class="en">Contours 1 m / 5 m</span><span class="ar">الكنتور 1 م / 5 م</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-04-slope.jpg" alt="Slope analysis map with slope bands, flow-direction arrows, drainage paths and slope area table" loading="lazy"><figcaption><span class="en">Slope, flow &amp; drainage</span><span class="ar">الانحدار واتجاه الجريان والتصريف</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-05-3d.jpg" alt="3D views of the existing ground with imagery, the finished grade and the cut and fill depth" loading="lazy"><figcaption><span class="en">3D: existing, design, cut/fill</span><span class="ar">ثلاثي الأبعاد: الطبيعي والتصميم والحفر والردم</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-07-cutfill.jpg" alt="Cut and fill isopach map with volume table and platform level versus earthworks chart" loading="lazy"><figcaption><span class="en">Cut &amp; fill isopach</span><span class="ar">خريطة الحفر والردم</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-08-profile.jpg" alt="Access road plan and longitudinal profile with VPIs, grades and elevation bands" loading="lazy"><figcaption><span class="en">Road plan &amp; profile</span><span class="ar">مسقط الطريق والقطاع الطولي</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-09-sections.jpg" alt="Platform cross sections with existing ground, finished grade and hatched cut and fill areas" loading="lazy"><figcaption><span class="en">Cross sections S1–S17</span><span class="ar">المقاطع العرضية</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-10-quantities.jpg" alt="Earthwork quantity schedule: average end area tables, grid versus section check, mass-haul diagram and bill of quantities" loading="lazy"><figcaption><span class="en">Quantity schedule &amp; BOQ</span><span class="ar">جدول الكميات وجدول البنود</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">C3D · QTO</span><span class="mono">Workflow project · public terrain data</span></div>
+            <h3><span class="en">Hillside earthworks: from survey to quantities</span><span class="ar">أعمال ترابية في منطقة جبلية: من الرفع إلى حصر الكميات</span></h3>
+            <p><span class="en">A complete Civil 3D earthworks workflow on a real 40 ha hillside in the Al-Baha highlands, built on public terrain data and satellite imagery to show every step in one connected project. 6,161 coded points (ground shots, road edges, buildings, trees) build an existing-ground TIN of 12,300 triangles, then a 10 m grid, 1 m / 5 m contours, slope bands, flow arrows and drainage paths. On the hilltop I designed a 140 × 90 m platform and a 190 m access road (max grade 8.7 %, 1V:2H daylight slopes), with the platform level set for a balanced site. Volumes were computed twice, by surface comparison and by average end area on 10 m sections (27,176 m³ cut and 26,206 m³ fill; the methods agree within 6 %), and issued as a ten-sheet drawing set with cross sections, a road profile, a mass-haul diagram and the bill of quantities.</span><span class="ar">مشروع متكامل لسير عمل الأعمال الترابية في Civil 3D على سفح جبلي حقيقي مساحته 40 هكتاراً في مرتفعات الباحة، مبني على بيانات ارتفاعات ومرئيات فضائية مفتوحة ليعرض كل خطوة في مشروع واحد مترابط. 6,161 نقطة مكوّدة (نقاط أرض، حواف طرق، مبانٍ، أشجار) تبني سطح TIN للأرض الطبيعية من 12,300 مثلث، ثم شبكية 10 م، وكنتور 1 م / 5 م، وفئات الانحدار وأسهم الجريان ومسارات التصريف. على قمة الموقع صممت منصة 140 × 90 م وطريق وصول بطول 190 م (أقصى ميل 8.7٪، ميول جانبية 1:2)، مع اختيار منسوب المنصة لموازنة الحفر والردم. حُسبت الحجوم بطريقتين: مقارنة الأسطح ومتوسط مساحات النهايات على مقاطع كل 10 م (27,176 م³ حفر و26,206 م³ ردم، والفرق بين الطريقتين أقل من 6٪)، وصدرت في مجموعة من عشر لوحات تشمل المقاطع العرضية والقطاع الطولي للطريق ومنحنى نقل الكتل وجدول الكميات.</span></p>
+            <dl>
+              <dt><span class="en">Scope</span><span class="ar">النطاق</span></dt><dd><span class="en">Survey coding, EG/FG surfaces, grading, sections, volumes, BOQ</span><span class="ar">تكويد الرفع، أسطح الطبيعي والتصميم، التسوية، المقاطع، الحجوم، جدول الكميات</span></dd>
+              <dt><span class="en">Data</span><span class="ar">البيانات</span></dt><dd><span class="en">Public elevation data · Esri World Imagery</span><span class="ar">بيانات ارتفاعات مفتوحة · مرئيات Esri</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>Civil 3D</span><span>AutoCAD</span><span>ArcGIS</span><span>Excel</span></dd>
+            </dl>
+          </div>
+        </article>
+      </div>
+      <div class="more-panel short-only">
+        <div>
+          <span class="label"><span class="en">That was the short version</span><span class="ar">كانت هذه النسخة المختصرة</span></span>
+          <h3><span class="en">See the full portfolio</span><span class="ar">اعرض الملف الكامل</span></h3>
+          <p><span class="en">11 more case studies (mobile mapping, LiDAR, scan-to-BIM, electricity, cadastre, field survey), plus teaching, career and tools.</span><span class="ar">11 دراسة حالة أخرى (المسح المتنقل، الليدار، النمذجة من المسح، الكهرباء، الرفع العقاري، الرفع الميداني)، إضافة إلى التدريس والمسيرة المهنية والأدوات.</span></p>
+        </div>
+        <div class="more-cta">
+          <button class="btn primary" type="button" data-go-full><span class="en">View full portfolio</span><span class="ar">عرض الملف الكامل</span> <span aria-hidden="true">↓</span></button>
+          <a class="btn ghost" href="#contact"><span class="en">Contact me</span><span class="ar">تواصل معي</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="full-only">
+    <div class="wrap">
+      <div class="sec-head"><span class="label"><span class="en">About</span><span class="ar">نبذة</span></span><h2><span class="en">Surveyor by training, systems thinker by practice.</span><span class="ar">مساح بالتكوين، ومفكر في الأنظمة بالممارسة.</span></h2></div>
+      <div class="about">
+        <div class="txt">
+          <p class="en">I am a Senior Geomatics Engineer and GIS &amp; Digital Twin Specialist, and a member of the Saudi Council of Engineers. Since 2016 I have worked across land surveying, GIS, Mobile Mapping Systems, LiDAR and BIM-GIS integration on infrastructure and smart-city projects in Saudi Arabia and Egypt.</p>
+          <p class="ar">مهندس جيوماتكس أول ومتخصص في نظم المعلومات الجغرافية والتوائم الرقمية، وعضو الهيئة السعودية للمهندسين. منذ 2016 أعمل في المساحة ونظم المعلومات الجغرافية وأنظمة المسح المتنقل والليدار وتكامل BIM مع GIS، في مشاريع بنية تحتية ومدن ذكية بالسعودية ومصر.</p>
+          <p class="en">My current focus is bringing GIS, BIM, CAD, point cloud and GPR data into one coordinated 3D environment, so engineers can see above-ground and underground assets together, check for conflicts and decide with confidence. This work was presented at the FIG Working Week in South Africa.</p>
+          <p class="ar">أركز حالياً على دمج بيانات GIS وBIM وCAD وسحب النقاط والرادار الأرضي (GPR) في بيئة ثلاثية الأبعاد واحدة، ليرى المهندسون الأصول فوق الأرض وتحتها معاً، ويكشفوا التعارضات ويتخذوا القرار بثقة. وقد عُرض هذا العمل في أسبوع عمل FIG بجنوب أفريقيا.</p>
+          <p class="en">I automate repetitive geospatial work with Python, I have taught GIS at university level, and as a PMI member preparing for the PMP I bring the same discipline to scope, schedule and quality.</p>
+          <p class="ar">أؤتمت المهام المكانية المتكررة باستخدام Python، ودرّست نظم المعلومات الجغرافية أكاديمياً، وبصفتي عضواً في PMI ومرشحاً لشهادة PMP أطبق الانضباط نفسه على النطاق والجدول والجودة.</p>
+        </div>
+        <dl class="facts">
+          <div><dt><span class="en">Current role</span><span class="ar">الدور الحالي</span></dt><dd><span class="en">MMS Expert, Alqotr</span><span class="ar">خبير مسح متنقل، القطر</span></dd></div>
+          <div><dt><span class="en">In the field since</span><span class="ar">في المجال منذ</span></dt><dd>2016</dd></div>
+          <div><dt><span class="en">Presented at</span><span class="ar">عُرض عملي في</span></dt><dd>FIG Working Week</dd></div>
+          <div><dt><span class="en">Membership</span><span class="ar">العضويات</span></dt><dd><span class="en">Saudi Council of Engineers · PMI</span><span class="ar">الهيئة السعودية للمهندسين · PMI</span></dd></div>
+          <div><dt><span class="en">Languages</span><span class="ar">اللغات</span></dt><dd><span class="en">Arabic (native) · English</span><span class="ar">العربية (الأم) · الإنجليزية</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section id="expertise" class="full-only">
+    <div class="wrap">
+      <div class="sec-head"><span class="label"><span class="en">Expertise</span><span class="ar">الخبرات</span></span><div><h2><span class="en">What I deliver</span><span class="ar">ما أقدّمه</span></h2><p><span class="en">Six service lines, each tied to deliverables a client can check.</span><span class="ar">ستة مجالات خدمة، لكل منها مخرجات واضحة يمكن للعميل مراجعتها.</span></p></div></div>
+      <div class="skills">
+        <div class="skill"><span class="code">TWIN</span><h3><span class="en">3D GIS &amp; Digital Twins</span><span class="ar">GIS ثلاثي الأبعاد والتوائم الرقمية</span></h3><p><span class="en">One coordinated 3D city model combining BIM, CAD, point clouds and underground GPR data, for visualisation and clash analysis.</span><span class="ar">نموذج مدينة ثلاثي الأبعاد يجمع BIM وCAD وسحب النقاط وبيانات GPR تحت الأرض، للعرض وتحليل التعارضات.</span></p></div>
+        <div class="skill"><span class="code">MMS</span><h3><span class="en">Mobile Mapping &amp; LiDAR</span><span class="ar">المسح المتنقل والليدار</span></h3><p><span class="en">LiDAR and panoramic capture with Trimble MX, then feature extraction and QC in TBC, TopoDOT, Orbit and MicroStation.</span><span class="ar">رفع بالليدار والصور البانورامية بنظام Trimble MX، ثم استخراج العناصر وضبط الجودة في TBC وTopoDOT وOrbit وMicroStation.</span></p></div>
+        <div class="skill"><span class="code">DTM</span><h3><span class="en">Surveying &amp; Terrain</span><span class="ar">المساحة ونماذج السطح</span></h3><p><span class="en">GNSS and total station surveys, DTM/DEM, contours, staking, and volume calculations in Civil 3D.</span><span class="ar">رفع بأجهزة GNSS والمحطة الشاملة، ونماذج DTM/DEM وخطوط الكنتور والتوقيع، وحساب الكميات في Civil 3D.</span></p></div>
+        <div class="skill"><span class="code">GDB</span><h3><span class="en">GIS &amp; Utility Networks</span><span class="ar">GIS وشبكات المرافق</span></h3><p><span class="en">Geodatabases, utility network modelling and spatial analysis in ArcGIS Pro, with PostgreSQL and SQL Server back ends.</span><span class="ar">قواعد بيانات مكانية ونمذجة شبكات المرافق والتحليل المكاني في ArcGIS Pro، مع قواعد PostgreSQL وSQL Server.</span></p></div>
+        <div class="skill"><span class="code">CAD ↔ GIS</span><h3><span class="en">Engineering Drawings &amp; Cadastre</span><span class="ar">الرسومات الهندسية والمساحة العقارية</span></h3><p><span class="en">AutoCAD drawings linked to GIS databases, including property and cadastral boundary mapping.</span><span class="ar">لوحات AutoCAD مرتبطة بقواعد بيانات GIS، ومنها تحديد حدود الملكيات والأراضي.</span></p></div>
+        <div class="skill"><span class="code">RS · UAV</span><h3><span class="en">Remote Sensing &amp; Photogrammetry</span><span class="ar">الاستشعار عن بعد والتصوير الجوي</span></h3><p><span class="en">Satellite and aerial image analysis: classification, change detection, clipping and mosaicking in ERDAS Imagine and ArcGIS, plus drone photogrammetry in Metashape.</span><span class="ar">تحليل المرئيات الفضائية والصور الجوية: التصنيف، رصد التغير، القص والدمج في ERDAS Imagine وArcGIS، إضافة إلى التصوير الجوي بالدرون في Metashape.</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="full-only">
+    <div class="wrap">
+      <div class="sec-head"><span class="label"><span class="en">Selected work</span><span class="ar">نماذج الأعمال</span></span><div><h2><span class="en">More case studies</span><span class="ar">دراسات حالة أخرى</span></h2><p><span class="en">Images are extracts from project deliverables. Client details are limited where projects are confidential.</span><span class="ar">الصور مقتطفات من مخرجات المشاريع الفعلية، مع الاكتفاء بالتفاصيل المسموح بنشرها في المشاريع السرية.</span></p></div></div>
+
+      <div class="projects">
+
+        <article class="proj proj-feature">
+          <figure class="reel"><video data-src="images/mms.mp4" poster="images/mms-street-cloud.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Mobile mapping workflow video"></video><figcaption><span class="en">Workflow · 36 s · capture → cloud → extraction → CAD</span><span class="ar">مسار العمل · 36 ثانية · الرفع ← السحابة ← الاستخراج ← CAD</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main"><img src="images/mms-street-cloud.jpg" alt="Colorized point cloud of a residential street intersection" loading="lazy"><figcaption><span class="en">Colorized point cloud</span><span class="ar">سحابة نقاط ملوّنة</span></figcaption></figure>
+            <figure class="shot"><img src="images/mms-extraction.jpg" alt="Extracted vector features drawn over the point cloud" loading="lazy"><figcaption><span class="en">Feature extraction over the cloud</span><span class="ar">استخراج العناصر على السحابة</span></figcaption></figure>
+            <figure class="shot"><img src="images/mms-interchange-cad.jpg" alt="AutoCAD drawing of an interchange extracted from mobile mapping" loading="lazy"><figcaption><span class="en">Interchange drawing (CAD)</span><span class="ar">لوحة تقاطع (CAD)</span></figcaption></figure>
+            <figure class="shot"><img src="images/mms-road-survey-detail.jpg" alt="Road survey layers: kerbs, fences, poles, signs and bridge columns at an interchange" loading="lazy"><figcaption><span class="en">Corridor survey · interchange detail</span><span class="ar">رفع الممر · تفصيل تقاطع</span></figcaption></figure>
+            <figure class="shot"><video data-src="images/mms-ai-detection.mp4" autoplay muted loop playsinline preload="metadata" aria-label="AI detection of visual pollution"></video><figcaption><span class="en">AI detection · visual pollution</span><span class="ar">الكشف الآلي · التشوه البصري</span></figcaption></figure>
+            <figure class="shot"><img src="images/mms-road-survey.jpg" alt="Overview of a 10 km highway corridor survey extracted from mobile mapping" loading="lazy"><figcaption><span class="en">10 km corridor survey</span><span class="ar">رفع ممر بطول 10 كم</span></figcaption></figure>
+            <figure class="shot"><img src="images/mms-dtm.jpg" alt="Colour elevation model with contours generated from point cloud data" loading="lazy"><figcaption><span class="en">Ground model from the cloud</span><span class="ar">نموذج السطح من السحابة</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/mms-pospac-levers.jpg" alt="POSPac MMS project settings: IMU and GNSS lever arms and mounting angles" loading="lazy"><figcaption><span class="en">In POSPac MMS · lever arms</span><span class="ar">من POSPac MMS · إزاحات الحساسات</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/mms-arcgispro-layers.jpg" alt="ArcGIS Pro: extracted feature layers over imagery" loading="lazy"><figcaption><span class="en">In ArcGIS Pro · extracted layers</span><span class="ar">من ArcGIS Pro · الطبقات المستخرجة</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/mms-cad-linework.jpg" alt="AutoCAD: extracted linework of buildings, roads and walls" loading="lazy"><figcaption><span class="en">In AutoCAD · extracted linework</span><span class="ar">من AutoCAD · الخطوط المستخرجة</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">MMS</span><span class="mono">Alqotr · AJC · 2022 – 2026</span></div>
+            <h3><span class="en">Mobile mapping, LiDAR &amp; feature extraction</span><span class="ar">المسح المتنقل والليدار واستخراج العناصر</span></h3>
+            <p><span class="en">Vehicle-mounted LiDAR and 360° imagery captured street by street, then registered, colorized and classified into survey-grade point clouds. From the cloud I extract kerbs, lane markings, poles, signs, fences and building lines into CAD and GIS layers, build ground models, and run AI detection of visual pollution and road defects. One delivered corridor survey covers about 10 km of highway with interchanges, bridge columns and 4,499 surveyed points.</span><span class="ar">رفع بالليدار والصور البانورامية المحمولة على المركبات شارعاً بشارع، ثم تسجيل البيانات وتلوينها وتصنيفها إلى سحب نقاط بدقة مساحية. أستخرج من السحابة الأرصفة وخطوط المسارات والأعمدة واللوحات والأسوار وخطوط المباني إلى طبقات CAD وGIS، وأبني نماذج السطح، وأشغّل الكشف الآلي عن التشوه البصري وعيوب الطرق. أحد الممرات المسلّمة يغطي نحو 10 كم من طريق سريع بتقاطعاته وأعمدة جسوره و4,499 نقطة مرفوعة.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Capture, processing, extraction, QC and final deliverables</span><span class="ar">الرفع والمعالجة والاستخراج وضبط الجودة والمخرجات النهائية</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Classified point clouds, CAD/GIS feature layers, DTM, defect reports</span><span class="ar">سحب نقاط مصنفة، طبقات عناصر CAD/GIS، نماذج سطح، تقارير العيوب</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>Trimble MX</span><span>TBC</span><span>TopoDOT</span><span>Orbit 3D</span><span>AutoCAD</span><span>ArcGIS Pro</span><span>AI detection</span></dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="proj proj-feature">
+          <figure class="reel"><video data-src="images/pm.mp4" poster="images/pm-cloud-2.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Highway point cloud workflow video"></video><figcaption><span class="en">Workflow · 26 s · registration → bridges → DEM</span><span class="ar">مسار العمل · 26 ثانية · التسجيل ← الجسور ← نموذج الارتفاعات</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main"><img src="images/pm-cloud-2.jpg" alt="Point cloud of a bridge beside high-rise buildings" loading="lazy"><figcaption><span class="en">Bridge and buildings</span><span class="ar">الجسر والمباني</span></figcaption></figure>
+            <figure class="shot"><img src="images/pm-cloud-1.jpg" alt="Point cloud of a long highway bridge" loading="lazy"><figcaption><span class="en">Highway bridge</span><span class="ar">جسر الطريق</span></figcaption></figure>
+            <figure class="shot"><img src="images/pm-cloud-4.jpg" alt="Point cloud of an interchange with ramps" loading="lazy"><figcaption><span class="en">Interchange</span><span class="ar">تقاطع</span></figcaption></figure>
+            <figure class="shot"><img src="images/pm-cloud-6.jpg" alt="Point cloud of an underpass and highway lanes" loading="lazy"><figcaption><span class="en">Underpass</span><span class="ar">نفق</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/pm-tbc-bridge.jpg" alt="Trimble Business Center 3D view of the highway bridge point cloud" loading="lazy"><figcaption><span class="en">In Trimble Business Center · bridge</span><span class="ar">من Trimble Business Center · الجسر</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/pm-tbc-interchange.jpg" alt="Trimble Business Center 3D view of an interchange point cloud" loading="lazy"><figcaption><span class="en">In Trimble Business Center · interchange</span><span class="ar">من Trimble Business Center · التقاطع</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">MMS</span><span class="mono">Alqotr · 2025</span></div>
+            <h3><span class="en">Highway corridor point cloud &amp; DEM</span><span class="ar">سحابة نقاط ممر طريق سريع ونموذج الارتفاعات</span></h3>
+            <p><span class="en">Mobile mapping of an urban highway with bridges, interchanges and ramps, processed in Trimble Business Center into a classified point cloud and a ground DEM, then a surface drawing for design.</span><span class="ar">رفع متنقل لطريق سريع حضري بجسوره وتقاطعاته ومنحدراته، ومعالجته في Trimble Business Center إلى سحابة نقاط مصنفة ونموذج ارتفاعات رقمي للأرض، ثم لوحة سطح للتصميم.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Project lead: processing, classification, DEM and surface</span><span class="ar">قائد المشروع: المعالجة والتصنيف ونموذج الارتفاعات والسطح</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Classified point cloud, DEM raster, Civil 3D surface</span><span class="ar">سحابة نقاط مصنفة، نموذج ارتفاعات، سطح Civil 3D</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>Trimble MX</span><span>TBC</span><span>ArcGIS Pro</span><span>Civil 3D</span></dd>
+            </dl>
+          </div>
+        </article>
+        <article class="proj proj-feature">
+          <figure class="reel"><video data-src="images/rc.mp4" poster="images/rc-building-cloud.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Reality capture workflow video"></video><figcaption><span class="en">Workflow · 32 s · scan → cloud → BIM → plans</span><span class="ar">مسار العمل · 32 ثانية · المسح ← السحابة ← BIM ← المخططات</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main"><img src="images/rc-building-cloud.jpg" alt="Laser-scan point cloud of a multi-storey building" loading="lazy"><figcaption><span class="en">Building point cloud</span><span class="ar">سحابة نقاط لمبنى</span></figcaption></figure>
+            <figure class="shot"><img src="images/rc-bim-model.jpg" alt="3D BIM model of a building generated from laser scanning" loading="lazy"><figcaption><span class="en">BIM model from scan</span><span class="ar">نموذج BIM من المسح</span></figcaption></figure>
+            <figure class="shot"><img src="images/rc-floor-plan.jpg" alt="2D floor plan drawn from scan data" loading="lazy"><figcaption><span class="en">Floor plan from scan</span><span class="ar">مخطط من المسح</span></figcaption></figure>
+            <figure class="shot"><img src="images/rc-scan-to-model.jpg" alt="Side-by-side of point cloud and textured model of an interior" loading="lazy"><figcaption><span class="en">Scan to model</span><span class="ar">من المسح إلى النموذج</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">SCAN</span><span class="mono">Alqotr · 2025 – 2026</span></div>
+            <h3><span class="en">Reality capture, scan-to-BIM &amp; virtual tours</span><span class="ar">الرفع ثلاثي الأبعاد والنمذجة وجولات الواقع الافتراضي</span></h3>
+            <p><span class="en">Terrestrial and SLAM laser scanning of buildings and heritage sites, turned into architectural and MEP models, 2D floor plans and Matterport virtual tours for owners and facility managers.</span><span class="ar">مسح ليزري أرضي ومحمول (SLAM) للمباني والمواقع التراثية، وتحويله إلى نماذج معمارية وكهروميكانيكية ومخططات ثنائية الأبعاد وجولات افتراضية (Matterport) للملاك ومديري المنشآت.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Scan planning, registration, scan-to-BIM workflow and deliverables</span><span class="ar">تخطيط المسح والتسجيل وسير عمل النمذجة والمخرجات</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Point clouds, BIM models, floor plans, virtual tours</span><span class="ar">سحب نقاط، نماذج BIM، مخططات، جولات افتراضية</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>FARO Focus</span><span>Trimble X12</span><span>SLAM</span><span>Matterport</span><span>Revit</span><span>AutoCAD</span></dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="proj proj-feature">
+          <figure class="reel"><video data-src="images/ai.mp4" poster="images/ai-segmentation.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="GeoAI video: AI detection of roads, buildings, facade defects and palm trees"></video><figcaption><span class="en">GeoAI · 7 detection tasks</span><span class="ar">الذكاء الاصطناعي الجيومكاني · 7 مهام كشف</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot"><img src="images/ai-segmentation.jpg" alt="Roads and buildings segmented automatically from aerial imagery" loading="lazy"><figcaption><span class="en">Road &amp; building segmentation</span><span class="ar">فصل الطرق والمباني</span></figcaption></figure>
+            <figure class="shot"><img src="images/ai-neglected-spaces.jpg" alt="Neglected plots detected and outlined across a district orthophoto" loading="lazy"><figcaption><span class="en">Neglected plots</span><span class="ar">الفراغات المهملة</span></figcaption></figure>
+            <figure class="shot"><img src="images/ai-facade-defects.jpg" alt="Facade defects flagged on a street panorama" loading="lazy"><figcaption><span class="en">Facade defects</span><span class="ar">تشوهات الواجهات</span></figcaption></figure>
+            <figure class="shot"><img src="images/ai-facade-objects.jpg" alt="Facade objects detected and boxed on a building panorama" loading="lazy"><figcaption><span class="en">Facade objects</span><span class="ar">عناصر الواجهات</span></figcaption></figure>
+            <figure class="shot"><img src="images/ai-palm-detection.jpg" alt="Palm trees detected and circled in drone imagery" loading="lazy"><figcaption><span class="en">Palm detection</span><span class="ar">حصر النخيل</span></figcaption></figure>
+            <figure class="shot"><img src="images/ai-palm-health.jpg" alt="Palm trees coloured by health class" loading="lazy"><figcaption><span class="en">Palm health</span><span class="ar">صحة النخيل</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">GEOAI</span><span class="mono">AJC · Alqotr · 2023 – 2026</span></div>
+            <h3><span class="en">AI-assisted classification &amp; feature extraction</span><span class="ar">التصنيف والاستخراج الآلي بالذكاء الاصطناعي</span></h3>
+            <p><span class="en">Point cloud and imagery software now ships with AI tools, and I use them to replace slow manual digitising: classifying ground, buildings, vegetation and street furniture in LiDAR clouds, then running deep-learning detection on drone orthophotos and MMS panoramas. On team GeoAI projects that meant segmenting roads and buildings, flagging neglected plots and facade defects for visual-pollution studies, finding dilapidated buildings, and counting palm trees and grading their health without a field visit. Every automated result is checked and cleaned before it reaches the GIS.</span><span class="ar">برامج معالجة السحب النقطية والصور أصبحت تضم أدوات ذكاء اصطناعي، وأستخدمها بدل الترقيم اليدوي البطيء: تصنيف الأرض والمباني والنباتات وعناصر الشارع في سحب الليدار، ثم تشغيل نماذج التعلم العميق على الصور الجوية من الدرون وصور المسح المتنقل البانورامية. وفي مشاريع الفريق للذكاء الاصطناعي الجيومكاني شمل ذلك فصل الطرق والمباني، ورصد الفراغات المهملة وتشوهات الواجهات لدراسات التشوه البصري، وكشف المباني المتهالكة، وحصر النخيل وتقييم صحته دون زيارة ميدانية. وكل نتيجة آلية تُراجع وتُنقّح قبل دخولها قاعدة بيانات GIS.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Running AI classification and detection tools, reviewing results, loading them into GIS (team projects)</span><span class="ar">تشغيل أدوات التصنيف والكشف الآلي ومراجعة النتائج وإدخالها في GIS (مشاريع فريق)</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Classified point clouds, detected features, inventory and condition layers</span><span class="ar">سحب نقاط مصنفة، عناصر مستخرجة، طبقات حصر وتقييم حالة</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>AI point cloud classification</span><span>Deep learning</span><span>Mask R-CNN</span><span>U-Net</span><span>ArcGIS Pro</span><span>MMS panoramas</span><span>Drone imagery</span></dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="proj proj-feature">
+          <figure class="reel"><video data-src="images/dir.mp4" poster="images/dir-detail.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="3D topographic GIS workflow video"></video><figcaption><span class="en">Workflow · 29 s · data model → zones → 3D features</span><span class="ar">مسار العمل · 29 ثانية · نموذج البيانات ← المناطق ← العناصر ثلاثية الأبعاد</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main"><img src="images/dir-detail.jpg" alt="Detailed 3D topographic GIS map with buildings, roads, walls, trees, poles and manholes" loading="lazy"><figcaption><span class="en">Zone detail · 3D features</span><span class="ar">تفصيل منطقة · عناصر ثلاثية الأبعاد</span></figcaption></figure>
+            <figure class="shot"><img src="images/dir-zone1.jpg" alt="Overview map of a surveyed zone along a valley" loading="lazy"><figcaption><span class="en">Zone overview</span><span class="ar">نظرة على المنطقة</span></figcaption></figure>
+            <figure class="shot"><img src="images/dir-zone3.jpg" alt="Overview map of a second surveyed zone" loading="lazy"><figcaption><span class="en">Second zone</span><span class="ar">المنطقة الثانية</span></figcaption></figure>
+            <figure class="shot"><img src="images/dir-chart.jpg" alt="Bar chart of surveyed features per layer" loading="lazy"><figcaption><span class="en">193,963 features · 39 layers</span><span class="ar">193,963 عنصراً · 39 طبقة</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">3D GIS</span><span class="mono">Alqotr · 2025</span></div>
+            <h3><span class="en">3D topographic GIS for a major Riyadh development</span><span class="ar">قاعدة بيانات طبوغرافية ثلاثية الأبعاد لمشروع تطوير كبير في الرياض</span></h3>
+            <p><span class="en">I led the conversion of survey and CAD data into a single 3D geodatabase across three zones and a boulevard: 193,963 features in 39 layers, each with X, Y and Z. The model covers spot levels, buildings, walls, road edges, kerbs, trees, light poles, manholes, water assets and green areas, ready for design and asset teams.</span><span class="ar">قدت تحويل بيانات الرفع وملفات CAD إلى قاعدة بيانات جغرافية ثلاثية الأبعاد واحدة لثلاث مناطق وممر رئيسي: 193,963 عنصراً في 39 طبقة، لكل عنصر إحداثياته الثلاثية. يغطي النموذج المناسيب والمباني والأسوار وحواف الطرق والأرصفة والأشجار وأعمدة الإنارة وغرف التفتيش وأصول المياه والمسطحات الخضراء، جاهزاً لفرق التصميم وإدارة الأصول.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Project lead: data model, CAD-to-GIS conversion, 3D attribution, QC</span><span class="ar">قائد المشروع: نموذج البيانات، تحويل CAD إلى GIS، الإسناد ثلاثي الأبعاد، الجودة</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Zone geodatabases, 3D feature classes, CAD deliverables</span><span class="ar">قواعد بيانات المناطق، فئات ثلاثية الأبعاد، مخرجات CAD</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>ArcGIS Pro</span><span>AutoCAD</span><span>Civil 3D</span><span>Data migration</span></dd>
+            </dl>
+          </div>
+        </article>
+        <article class="proj proj-feature">
+          <figure class="reel"><video data-src="images/elec.mp4" poster="images/elec-pro-outage.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Electricity distribution case-study film: field capture, data model, LV network trace, rule checks, transformer capacity and circuit utilisation"></video><figcaption><span class="en">Case-study film · 1 min 45 s · with sound</span><span class="ar">فيلم المشروع · دقيقة و45 ثانية · بالصوت</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main sheet"><img src="images/elec-layout.jpg" alt="ArcGIS map layout of one electricity zone with the MV ring and LV feeder cables, assets, legend, detail frame and attribute QC chart" loading="lazy"><figcaption><span class="en">Network layout · MV &amp; LV cables</span><span class="ar">مخطط الشبكة · كابلات المتوسط والمنخفض</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/elec-cables.jpg" alt="MV ring cables and LV feeder cables along the streets over satellite imagery with substations, RMUs and boxes" loading="lazy"><figcaption><span class="en">Cables over imagery</span><span class="ar">الكابلات على المرئية</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/elec-pro-layers.jpg" alt="Exploded layer stack: imagery, service areas, feeders, boxes, transformers and substations" loading="lazy"><figcaption><span class="en">Imagery + network layers</span><span class="ar">المرئيات وطبقات الشبكة</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/elec-pro-outage.jpg" alt="Substation outage with its boxes back-fed from four neighbouring substations over imagery" loading="lazy"><figcaption><span class="en">Outage &amp; load transfer</span><span class="ar">الانقطاع ونقل الأحمال</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/elec-pro-feeders.jpg" alt="Low-voltage feeders traced from each substation through its distribution boxes over imagery" loading="lazy"><figcaption><span class="en">LV network traced</span><span class="ar">تتبع شبكة الجهد المنخفض</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/elec-pro-qc.jpg" alt="Rule checks flagging unmatched boxes, distant boxes and attribute completeness" loading="lazy"><figcaption><span class="en">Rule checks</span><span class="ar">فحوص القواعد</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/elec-pro-utilisation.jpg" alt="Distribution boxes coloured by circuit utilisation with substation service areas" loading="lazy"><figcaption><span class="en">Circuit use &amp; service areas</span><span class="ar">استغلال الدوائر ومناطق الخدمة</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/elec-field-to-gis.jpg" alt="Field photos of substations and boxes beside their GIS attribute records" loading="lazy"><figcaption><span class="en">Field asset → GIS feature</span><span class="ar">من الأصل الميداني إلى GIS</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/elec-arcmap-near.jpg" alt="ArcMap: Near tool linking service points to the MV overhead cable, with attribute table; coordinates blurred" loading="lazy"><figcaption><span class="en">In ArcMap · Near to MV cable</span><span class="ar">من ArcMap · أقرب كابل جهد متوسط</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/elec-arcmap-xytoline.jpg" alt="ArcMap: XY To Line connections from service points to the MV cable; coordinates blurred" loading="lazy"><figcaption><span class="en">In ArcMap · service connections</span><span class="ar">من ArcMap · توصيلات الخدمة</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">GDB</span><span class="mono">AJC · 2022 – 2025</span></div>
+            <h3><span class="en">Electricity distribution GIS</span><span class="ar">نظم المعلومات الجغرافية لشبكات توزيع الكهرباء</span></h3>
+            <p><span class="en">Digital transformation of a national utility's distribution network, which I worked on for a long period. Field teams photographed every asset; I turned the photos and survey data into features in an ArcFM utility data model (58 feature classes), built substations from CAD design templates, and rebuilt the low-voltage network from the feeder numbers: 1,038 feeders traced from substation through each distribution box in order. Every zone then went through rule checks (boxes with no matching substation, boxes more than 500 m from their substation, used circuits above installed circuits, non-standard transformer ratings) and attribute-completeness scoring before handover. The analysis layer shows installed transformer capacity (307 MVA of known ratings in one zone), LV circuit utilisation (65% in multi-circuit boxes, with 268 boxes fully used) and 166 substation service areas. On satellite imagery of the zone I also ran outage scenarios: when a substation goes out of service, its 17 boxes are traced and back-fed from the 4 nearest live substations (median transfer 73 m). IDs and customer data are left out.</span><span class="ar">التحول الرقمي لشبكة توزيع مرفق وطني، وهو مشروع عملت عليه فترة طويلة. صوّرت الفرق الميدانية كل أصل، وحوّلتُ الصور والبيانات المساحية إلى عناصر في نموذج بيانات المرفق ArcFM (58 فئة)، وبنيت المحطات من قوالب التصميم في AutoCAD، وأعدت بناء شبكة الجهد المنخفض من أرقام المغذيات: تتبعت 1,038 مغذياً من المحطة عبر كل صندوق توزيع بالترتيب. ثم خضعت كل منطقة لفحوص القواعد (صناديق بلا رقم محطة مطابق، وصناديق تبعد أكثر من 500 م عن محطتها، ودوائر مستخدمة أكثر من المركبة، وقدرات محولات غير قياسية) ولقياس اكتمال البيانات قبل التسليم. وتعرض طبقة التحليل القدرة المركبة للمحولات (307 ميجافولت أمبير من القدرات المعروفة في منطقة واحدة)، واستغلال دوائر الجهد المنخفض (65% في الصناديق متعددة الدوائر، و268 صندوقاً مستغلاً بالكامل)، و166 منطقة خدمة للمحطات. وعلى المرئيات الفضائية للمنطقة نفذت سيناريوهات الانقطاع: عند خروج محطة من الخدمة تُتتبع صناديقها السبعة عشر وتُغذّى عكسياً من أقرب 4 محطات عاملة (بمسافة نقل وسيطة 73 م). حُذفت الأرقام وبيانات المشتركين.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Data intake, network modelling, substation building, rule-based QC, analysis, team guidance</span><span class="ar">استلام البيانات، نمذجة الشبكة، بناء المحطات، ضبط الجودة بالقواعد، التحليل، توجيه الفريق</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Validated network geodatabase, QC reports, capacity and utilisation maps, service-area layer</span><span class="ar">قاعدة بيانات شبكة معتمدة، تقارير الجودة، خرائط القدرات والاستغلال، طبقة مناطق الخدمة</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>ArcGIS</span><span>ArcFM</span><span>AutoCAD</span><span>Excel</span></dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="proj proj-feature">
+          <figure class="reel"><video data-src="images/rua.mp4" poster="images/rua-sheet-callouts.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Topographic survey workflow video"></video><figcaption><span class="en">Sheet set → detail → surface QC · 36 s</span><span class="ar">اللوحات ← التفاصيل ← فحص السطح · 36 ثانية</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main sheet" style="aspect-ratio:2480/1360"><img src="images/rua-sheet-callouts.jpg" alt="Issued A0 topographic sheet with two magnified details of street features and contours" loading="lazy"><figcaption><span class="en">A0 sheet with details</span><span class="ar">لوحة A0 مع التفاصيل</span></figcaption></figure>
+            <figure class="shot"><img src="images/rua-keyplan.jpg" alt="Key plan dividing a site into numbered A0 sheets" loading="lazy"><figcaption><span class="en">Key plan · sheet grid</span><span class="ar">اللوحة المفتاحية</span></figcaption></figure>
+            <figure class="shot"><img src="images/rua-detail.jpg" alt="Close-up of survey detail with spot levels and features" loading="lazy"><figcaption><span class="en">Feature detail</span><span class="ar">تفصيل العناصر</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/rua-qc.jpg" alt="Histogram of level differences between reference points and the new surface" loading="lazy"><figcaption><span class="en">Surface QC · 1,911 points</span><span class="ar">فحص السطح · 1,911 نقطة</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">TOPO</span><span class="mono">Alqotr · 2025</span></div>
+            <h3><span class="en">Topographic survey of five sites in Makkah</span><span class="ar">الرفع الطبوغرافي لخمسة مواقع في مكة المكرمة</span></h3>
+            <p><span class="en">Full topographic survey deliverables for five sites, each split into a grid of A0 sheets with a key plan: parcels, roads, walls, utilities and dense spot levels in Civil 3D and AutoCAD. Before issue I checked the new surface against 1,911 reference levels from earlier surveys; the comparison exposed a consistent offset of about 0.43 m, flagged in the QC report.</span><span class="ar">مخرجات رفع طبوغرافي كاملة لخمسة مواقع، كل موقع مقسّم إلى شبكة لوحات A0 مع لوحة مفتاحية: القطع والطرق والأسوار والمرافق ومناسيب كثيفة في Civil 3D وAutoCAD. قبل الإصدار قارنت السطح الجديد بـ1,911 منسوباً مرجعياً من رفوعات سابقة، وكشفت المقارنة فرقاً منتظماً بنحو 0.43 م وُثّق في تقرير الجودة.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Project lead: processing, surface building, QC, sheet production</span><span class="ar">قائد المشروع: المعالجة، بناء الأسطح، الجودة، إخراج اللوحات</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Civil 3D surfaces, A0 sheet sets, comparison reports</span><span class="ar">أسطح Civil 3D، مجموعات لوحات A0، تقارير المقارنة</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>Civil 3D</span><span>AutoCAD</span><span>Excel</span><span>GNSS</span></dd>
+            </dl>
+          </div>
+        </article>
+        <article class="proj proj-feature">
+          <figure class="reel"><video data-src="images/c3d.mp4" poster="images/c3d-sheet-plan.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Surface modelling workflow video"></video><figcaption><span class="en">Plan · elevation · profile sheets · 27 s</span><span class="ar">لوحات المسقط والارتفاعات والقطاع · 27 ثانية</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main sheet"><img src="images/c3d-sheet-plan.jpg" alt="Topographic plan sheet at 1:1000 with spot levels, kerbs, street furniture, contours, legend and title block" loading="lazy"><figcaption><span class="en">Topographic plan · 1:1000</span><span class="ar">لوحة طبوغرافية · 1:1000</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-sheet-elevation.jpg" alt="Colour elevation map sheet with elevation range table and 1 m contours" loading="lazy"><figcaption><span class="en">Colour elevation + table</span><span class="ar">الارتفاعات الملونة مع الجدول</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/c3d-sheet-profile.jpg" alt="Longitudinal profile sheet of existing ground along a 10.8 km corridor with chainage band" loading="lazy"><figcaption><span class="en">Longitudinal profile</span><span class="ar">القطاع الطولي</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">C3D</span><span class="mono">Alqotr · AJC · earlier roles</span></div>
+            <h3><span class="en">Surfaces, contours, quantities &amp; topographic mapping</span><span class="ar">الأسطح والكنتور والكميات والخرائط الطبوغرافية</span></h3>
+            <p><span class="en">Survey data turned into terrain surfaces and drawing sets in Civil 3D and ArcGIS. A typical road-corridor package has ten sheets: details, CAD, map, contours, colour contours, colour elevation, slope arrows, slope areas, triangulation and the Civil 3D model. I also prepare earthwork and quantity extracts, and topographic databases to the TDS standard. The sample sheets here come from one 10.8 km corridor survey of 4,499 points: a 1:1000 plan, a colour elevation map with its range table, and the longitudinal profile.</span><span class="ar">تحويل بيانات الرفع إلى أسطح ولوحات في Civil 3D وArcGIS. حزمة ممر الطريق النموذجية عشر لوحات: التفاصيل، CAD، الخريطة، الكنتور، الكنتور الملوّن، الارتفاعات الملوّنة، أسهم الميول، مناطق الميول، الشبكة المثلثية، ونموذج Civil 3D. وأعد أيضاً مستخلصات الكميات وأعمال التربة، وقواعد البيانات الطبوغرافية وفق معيار TDS. اللوحات المعروضة هنا عينة من رفع ممر طوله 10.8 كم و4,499 نقطة: مسقط بمقياس 1:1000، وخريطة ارتفاعات ملوّنة مع جدول الفئات، والقطاع الطولي.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Surface modelling, contouring, slope analysis, quantity extracts, sheet production</span><span class="ar">نمذجة الأسطح، الكنتور، تحليل الميول، الكميات، إخراج اللوحات</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">TIN surfaces, contour and slope maps, quantity tables, TDS topographic data</span><span class="ar">أسطح TIN، خرائط الكنتور والميول، جداول الكميات، بيانات طبوغرافية</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>Civil 3D</span><span>AutoCAD</span><span>ArcGIS</span><span>Global Mapper</span></dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="proj proj-feature">
+          <figure class="reel"><video data-src="images/gis.mp4" poster="images/gis-pro-parcels.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Roads, parcels and imagery film: parcels and buildings drawn over satellite imagery, layers separating and overlaying, street network, interchange lanes and a swipe check"></video><figcaption><span class="en">Case-study film · 48 s · with sound</span><span class="ar">فيلم المشروع · 48 ثانية · بالصوت</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot main"><video data-src="images/gis-cad2gis.mp4" poster="images/gis-cad2gis-poster.jpg" autoplay muted loop playsinline preload="none" aria-label="The same roundabout in Civil 3D and then in ArcGIS Pro after CAD-to-GIS conversion"></video><figcaption><span class="en">Dry port · client CAD → GIS database</span><span class="ar">ميناء جاف · من ملفات الكاد إلى قاعدة بيانات GIS</span></figcaption></figure>
+            <figure class="shot"><img src="images/gis-pro-stack.jpg" alt="Parcels and buildings layer lifted above the satellite imagery it was drawn from" loading="lazy"><figcaption><span class="en">Vector layer over imagery</span><span class="ar">الطبقة فوق المرئية</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/gis-pro-parcels.jpg" alt="Parcels and buildings digitised over satellite imagery" loading="lazy"><figcaption><span class="en">Parcels &amp; buildings</span><span class="ar">القطع والمباني</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/gis-pro-lanes.jpg" alt="Interchange lanes and ramps drawn over imagery" loading="lazy"><figcaption><span class="en">Interchange lanes</span><span class="ar">مسارات التقاطعات</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/gis-pro-swipe.jpg" alt="Swipe comparison between digitised lines and the raw imagery" loading="lazy"><figcaption><span class="en">Swipe check</span><span class="ar">فحص بالسحب</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/road-signs-sheet.jpg" alt="Client-supplied CAD sheet of the dry port link road, roundabouts, traffic signs and road marking, used as the source for GIS conversion; title block removed" loading="lazy"><figcaption><span class="en">Client CAD sheet · conversion source</span><span class="ar">لوحة كاد مسلّمة · مصدر التحويل</span></figcaption></figure>
+            <figure class="shot sheet"><img src="images/gis-pro-cad2gdb.jpg" alt="ArcGIS Pro: CAD To Geodatabase run details with input drawing, output geodatabase and UTM 40N spatial reference" loading="lazy"><figcaption><span class="en">In ArcGIS Pro · CAD To Geodatabase</span><span class="ar">من ArcGIS Pro · تحويل الكاد إلى قاعدة بيانات</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">GIS</span><span class="mono">AJC · Alqotr</span></div>
+            <h3><span class="en">Roads, parcels, imagery &amp; spatial analysis</span><span class="ar">الطرق والقطع والمرئيات والتحليل المكاني</span></h3>
+            <p><span class="en">Roads, road buffers and land parcels digitized from imagery and open data, cleaned to a layer standard and exported to municipal geodatabases. Each delivery passes a QC routine for geometry, topology and attribute completeness. Satellite and aerial imagery is classified, clipped and analysed to support land-use and change studies. For a dry port project, the client's AutoCAD drawings were converted into an updated GIS geodatabase in ArcGIS Pro: CAD To Geodatabase, then layers split by CAD layer into roads, edges, centrelines and markings, with the CAD attributes kept.</span><span class="ar">رسم الطرق ونطاقاتها وقطع الأراضي من الصور الجوية والبيانات المفتوحة، وتنظيفها وفق معيار طبقات موحّد، وتصديرها إلى قواعد البيانات البلدية. يمر كل تسليم بإجراءات فحص للأشكال والطوبولوجيا واكتمال البيانات الوصفية. وتُصنَّف المرئيات الفضائية والصور الجوية وتُقص وتُحلل لدعم دراسات استعمالات الأراضي ورصد التغير. وفي مشروع ميناء جاف، حُوّلت ملفات الأوتوكاد المسلّمة من العميل إلى قاعدة بيانات GIS محدّثة في ArcGIS Pro: تحويل الكاد إلى قاعدة بيانات، ثم فصل الطبقات حسب طبقات الكاد إلى طرق وحواف ومحاور وتخطيط، مع الاحتفاظ بخصائص الكاد.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Digitizing, CAD-to-GIS conversion, layer standards, spatial analysis, QC</span><span class="ar">الرسم، تحويل الكاد إلى GIS، معايير الطبقات، التحليل المكاني، ضبط الجودة</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Road and parcel layers, GIS geodatabase from CAD, QC exports</span><span class="ar">طبقات الطرق والقطع، قاعدة بيانات GIS من الكاد، مخرجات الفحص</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>ArcGIS Pro</span><span>ERDAS Imagine</span><span>AutoCAD / Civil 3D</span><span>OpenStreetMap</span><span>ModelBuilder</span></dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="proj proj-feature">
+          <figure class="reel"><video data-src="images/survey-reel.mp4" poster="images/survey-poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Workflow video: title deed and plan review, aerial imagery, geo-portal check, field survey, boundary drafting, plan comparison and final survey report"></video><figcaption><span class="en">Workflow · 65 s · deed and plan → field survey → boundary report</span><span class="ar">مسار العمل · 65 ثانية · من الصك والمخطط إلى الرفع الميداني ثم تقرير الحدود</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot"><img src="images/cad-field-survey.jpg" alt="Survey sheet: plot boundary over aerial imagery, site photographs, legend and boundary table" loading="lazy"><figcaption><span class="en">Field survey sheet · details redacted</span><span class="ar">لوحة رفع ميداني · البيانات محجوبة</span></figcaption></figure>
+            <figure class="shot"><img src="images/cad-decision.jpg" alt="Survey decision sheet: plot boundary on the approved plan with boundary and length tables" loading="lazy"><figcaption><span class="en">Survey decision</span><span class="ar">قرار مساحي</span></figcaption></figure>
+            <figure class="shot"><img src="images/cad-ajc-report-1.jpg" alt="Survey report: site boundary sketch with lengths, area and boundary comparison table" loading="lazy"><figcaption><span class="en">Survey report · utility site</span><span class="ar">تقرير مساحي · موقع مرافق</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">CAD</span><span class="mono">AJC · Alqotr · 2022 – 2026</span></div>
+            <h3><span class="en">Property surveys, survey decisions &amp; boundary reports</span><span class="ar">الرفع العقاري والقرارات والتقارير المساحية</span></h3>
+            <p><span class="en">I prepared official survey reports and survey decisions for land plots and public facilities across Saudi Arabia, including a municipal surveying program in Riyadh and utility sites in the Eastern Province. Each sheet compares boundaries on the ground with the approved plan or title deed, and records lengths, areas and UTM coordinates tied to municipal benchmarks.</span><span class="ar">أعددت تقارير وقرارات مساحية رسمية لقطع أراضٍ ومرافق عامة في عدة مناطق بالمملكة، منها برنامج رفع مساحي بلدي في الرياض ومواقع مرافق في المنطقة الشرقية. تقارن كل لوحة الحدود على الطبيعة بالمخطط المعتمد أو الصك، وتوثّق الأطوال والمساحات والإحداثيات (UTM) المربوطة بنقاط الأمانة المرجعية.</span></p>
+            <dl>
+              <dt><span class="en">Role</span><span class="ar">دوري</span></dt><dd><span class="en">Prepared the reports: processing field data, boundary comparison, drafting and sheet layout</span><span class="ar">إعداد التقارير: معالجة بيانات الرفع، مقارنة الحدود، الرسم وإخراج اللوحة</span></dd>
+              <dt><span class="en">Output</span><span class="ar">المخرجات</span></dt><dd><span class="en">Survey reports, survey decisions, boundary and area tables</span><span class="ar">تقارير مساحية، قرارات مساحية، جداول الحدود والمساحات</span></dd>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>AutoCAD</span><span>ArcGIS</span><span>GNSS</span><span>Aerial imagery</span></dd>
+            </dl>
+          </div>
+        </article>
+
+        <article class="proj proj-feature early">
+          <figure class="reel"><video data-src="images/field.mp4" poster="images/field-gnss-base.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Field surveying video: GNSS control, detail survey, GPR utility detection and spot levels"></video><figcaption><span class="en">Field work by survey teams on similar projects</span><span class="ar">أعمال ميدانية لفرق المساحة في مشاريع مماثلة</span></figcaption></figure>
+          <div class="gallery">
+            <figure class="shot"><img src="images/field-gnss-base.jpg" alt="GNSS base station on a tripod over a marked control point" loading="lazy"><figcaption><span class="en">GNSS base on control</span><span class="ar">محطة GNSS على نقطة تحكم</span></figcaption></figure>
+            <figure class="shot"><img src="images/field-control-point.jpg" alt="Protected survey control point with GNSS receiver" loading="lazy"><figcaption><span class="en">Survey control point</span><span class="ar">نقطة تحكم مساحية</span></figcaption></figure>
+            <figure class="shot"><img src="images/field-crew.jpg" alt="Survey crew carrying out a detail survey on site" loading="lazy"><figcaption><span class="en">Detail survey crew</span><span class="ar">فريق الرفع التفصيلي</span></figcaption></figure>
+            <figure class="shot"><img src="images/field-gpr-highway.jpg" alt="Ground-penetrating radar cart scanning a road for buried utilities" loading="lazy"><figcaption><span class="en">GPR utility scan</span><span class="ar">مسح GPR للمرافق</span></figcaption></figure>
+            <figure class="shot"><img src="images/field-gpr-3d.jpg" alt="GPR-detected utility lines modelled in 3D under a street" loading="lazy"><figcaption><span class="en">GPR results in 3D</span><span class="ar">نتائج GPR ثلاثية الأبعاد</span></figcaption></figure>
+            <figure class="shot"><img src="images/field-spot-levels.jpg" alt="Map of 66,620 surveyed spot levels coloured by elevation" loading="lazy"><figcaption><span class="en">66,620 spot levels</span><span class="ar">66,620 منسوباً مرفوعاً</span></figcaption></figure>
+          </div>
+          <div class="ptext">
+            <div class="meta"><span class="tag">FIELD</span><span class="mono">Egypt · Saudi Arabia · 2016 – present</span></div>
+            <h3><span class="en">Field surveying with conventional and modern instruments</span><span class="ar">الرفع الميداني بالأجهزة التقليدية والحديثة</span></h3>
+            <p><span class="en">Field work runs through my whole career. In Egypt I spent five years with total stations, levels and GNSS: road surveys for the Asyut Western Road and the Abu Zenima–Gharandal road, construction surveying for the Commanders' Hospital, and survey consultancy for King Salman University networks, where I checked contractors' surveys and prepared quantity extracts for drainage, water, irrigation and firefighting lines. In Saudi Arabia the field work moved to modern instruments: GNSS control networks, detail surveys, ground-penetrating radar for buried utilities, and mobile and terrestrial scanning, with every observation processed into checked survey drawings and GIS layers.</span><span class="ar">العمل الميداني حاضر في مسيرتي كلها. في مصر عملت خمس سنوات بالمحطات الشاملة والميزان وأجهزة GNSS: رفع طريق أسيوط الغربي وطريق أبو زنيمة–غرندل، والمساحة الإنشائية لمستشفى القادة، واستشارات المساحة لشبكات جامعة الملك سلمان، حيث راجعت رفوعات المقاولين وأعددت مستخلصات الكميات لشبكات الصرف والمياه والري والحريق. وفي السعودية انتقل العمل الميداني إلى الأجهزة الحديثة: شبكات تحكم GNSS، والرفع التفصيلي، والرادار الأرضي GPR لكشف المرافق المدفونة، والمسح المتنقل والأرضي بالليزر، مع معالجة كل الأرصاد إلى لوحات مساحية وطبقات GIS مدققة.</span></p>
+            <p class="note"><span class="en">Photos show company survey teams on similar projects, shared to illustrate the methods.</span><span class="ar">الصور لفرق المساحة بالشركة في مشاريع مماثلة، وتُعرض لتوضيح طرق العمل.</span></p>
+            <dl>
+              <dt><span class="en">Tools</span><span class="ar">الأدوات</span></dt><dd class="chips"><span>Total station</span><span>Level</span><span>GNSS / RTK</span><span>GPR</span><span>AutoCAD</span><span>Civil 3D</span></dd>
+            </dl>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINING -->
+  <section id="training" class="full-only">
+    <div class="wrap">
+      <div class="sec-head"><span class="label"><span class="en">Teaching</span><span class="ar">التدريس</span></span><div><h2><span class="en">Teaching, training &amp; course materials</span><span class="ar">التدريس والتدريب وإعداد المواد التعليمية</span></h2><p><span class="en">I teach GIS and survey data processing, and write the full course material myself: lessons, exercises and capstone projects.</span><span class="ar">أُدرّس نظم المعلومات الجغرافية ومعالجة البيانات المساحية، وأُعدّ المادة التعليمية كاملة بنفسي: الدروس والتمارين والمشاريع التطبيقية.</span></p></div></div>
+      <div class="courses">
+        <article class="course">
+          <span class="mono">5 days · 106 pages · ArcGIS Pro</span>
+          <h3><span class="en">Advanced spatial analysis and change detection in GIS</span><span class="ar">التحليلات المكانية المتقدمة ورصد التغيرات في نظم المعلومات الجغرافية</span></h3>
+          <ol>
+            <li><span class="en">Spatial analysis concepts</span><span class="ar">مدخل إلى التحليل المكاني ومفاهيمه</span></li>
+            <li><span class="en">Topographic and surface analysis</span><span class="ar">التحليل الطوبوغرافي وتحليل الأسطح</span></li>
+            <li><span class="en">Network analysis</span><span class="ar">التحليل الشبكي</span></li>
+            <li><span class="en">Spatial statistics</span><span class="ar">التحليل الإحصائي المكاني</span></li>
+            <li><span class="en">Spatio-temporal change detection</span><span class="ar">رصد التغيرات الزمنية والمكانية</span></li>
+          </ol>
+        </article>
+        <article class="course">
+          <span class="mono">94 pages · Civil 3D</span>
+          <h3><span class="en">Civil 3D for survey data processing and surface modelling</span><span class="ar">معالجة البيانات المساحية ونمذجة الأسطح باستخدام Civil 3D</span></h3>
+          <ol>
+            <li><span class="en">Understanding survey data before processing</span><span class="ar">فهم بيانات الرفع قبل المعالجة</span></li>
+            <li><span class="en">Detecting and fixing survey errors</span><span class="ar">اكتشاف أخطاء الرفع ومعالجتها</span></li>
+            <li><span class="en">Building accurate digital surfaces</span><span class="ar">إنشاء الأسطح الرقمية بدقة</span></li>
+            <li><span class="en">Quantities and surface analysis</span><span class="ar">حساب الكميات وتحليل الأسطح</span></li>
+            <li><span class="en">Producing engineering drawings, with a full capstone project</span><span class="ar">إخراج اللوحات الهندسية مع مشروع تطبيقي متكامل</span></li>
+          </ol>
+        </article>
+        <article class="course">
+          <span class="mono">Oct 2023 – Jan 2025 · Lecturer</span>
+          <h3><span class="en">GIS lecturer · Maadi International Academy</span><span class="ar">محاضر نظم المعلومات الجغرافية · أكاديمية المعادي الدولية</span></h3>
+          <ol>
+            <li><span class="en">GIS theory and spatial data fundamentals</span><span class="ar">أسس نظم المعلومات الجغرافية والبيانات المكانية</span></li>
+            <li><span class="en">Hands-on ArcGIS workflows</span><span class="ar">التطبيق العملي على ArcGIS</span></li>
+            <li><span class="en">Google Earth Pro for mapping and data collection</span><span class="ar">Google Earth Pro للخرائط وجمع البيانات</span></li>
+            <li><span class="en">Mentoring students for GIS careers</span><span class="ar">توجيه الطلاب نحو سوق العمل في GIS</span></li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="full-only">
+    <div class="wrap">
+      <div class="sec-head"><span class="label"><span class="en">Experience</span><span class="ar">المسيرة</span></span><h2><span class="en">Career</span><span class="ar">المسيرة المهنية</span></h2></div>
+      <div class="timeline">
+        <div class="job">
+          <span class="mono"><span class="en">Jan 2025 — Present</span><span class="ar">يناير 2025 — حتى الآن</span></span>
+          <h3><span class="en">Mobile Mapping System Expert</span><span class="ar">خبير أنظمة المسح المتنقل</span></h3>
+          <span class="where"><span class="en">Alqotr Engineering Consulting Company · Saudi Arabia</span><span class="ar">شركة القطر للاستشارات الهندسية · السعودية</span></span>
+          <ul>
+            <li><span class="en">Integrated BIM, CAD, point cloud and GPR data into a coordinated 3D city model in ArcScene.</span><span class="ar">دمج بيانات BIM وCAD وسحب النقاط وGPR في نموذج مدينة ثلاثي الأبعاد منسق على ArcScene.</span></li>
+            <li><span class="en">Produced 3D visuals presented at the FIG Working Week in South Africa.</span><span class="ar">إنتاج مرئيات ثلاثية الأبعاد عُرضت في أسبوع عمل FIG بجنوب أفريقيا.</span></li>
+          </ul>
+        </div>
+        <div class="job">
+          <span class="mono"><span class="en">Aug 2022 — Jan 2025</span><span class="ar">أغسطس 2022 — يناير 2025</span></span>
+          <h3><span class="en">GIS Analyst</span><span class="ar">محلل نظم معلومات جغرافية</span></h3>
+          <span class="where"><span class="en">AJC Information Technology Company · Saudi Arabia</span><span class="ar">شركة AJC لتقنية المعلومات · السعودية</span></span>
+          <ul>
+            <li><span class="en">Led GIS design and analysis of electrical networks for digital transformation projects.</span><span class="ar">قيادة تصميم وتحليل شبكات الكهرباء على GIS لمشاريع التحول الرقمي.</span></li>
+            <li><span class="en">Operated MMS and processed LiDAR into DTM/DEM, topographic maps and contours.</span><span class="ar">تشغيل المسح المتنقل ومعالجة بيانات الليدار إلى نماذج سطح وخرائط طبوغرافية وكنتور.</span></li>
+            <li><span class="en">Linked AutoCAD drawings to GIS databases, including cadastral boundary work.</span><span class="ar">ربط لوحات AutoCAD بقواعد بيانات GIS، ومنها أعمال حدود الملكيات.</span></li>
+          </ul>
+        </div>
+        <div class="job">
+          <span class="mono"><span class="en">Oct 2023 — Jan 2025</span><span class="ar">أكتوبر 2023 — يناير 2025</span></span>
+          <h3><span class="en">GIS Lecturer</span><span class="ar">محاضر نظم المعلومات الجغرافية</span></h3>
+          <span class="where"><span class="en">Maadi International Academy (MIA)</span><span class="ar">أكاديمية المعادي الدولية (MIA)</span></span>
+          <ul><li><span class="en">Taught GIS theory and hands-on ArcGIS and Google Earth Pro, and mentored students for GIS careers.</span><span class="ar">تدريس أسس GIS والتطبيق العملي على ArcGIS وGoogle Earth Pro، وتوجيه الطلاب نحو سوق العمل.</span></li></ul>
+        </div>
+        <div class="job">
+          <span class="mono"><span class="en">Jun 2021 — Apr 2022</span><span class="ar">يونيو 2021 — أبريل 2022</span></span>
+          <h3><span class="en">GIS Specialist &amp; GIS Analyst</span><span class="ar">أخصائي ومحلل نظم معلومات جغرافية</span></h3>
+          <span class="where"><span class="en">Edge Pro · Afaq Management Consulting · Freelance</span><span class="ar">إيدج برو · آفاق للاستشارات الإدارية · عمل حر</span></span>
+          <ul>
+            <li><span class="en">Remote sensing and GIS for agricultural resources with ERDAS Imagine and GeoMedia; GIS server management.</span><span class="ar">استشعار عن بعد وGIS لإدارة الموارد الزراعية باستخدام ERDAS Imagine وGeoMedia، وإدارة خوادم GIS.</span></li>
+            <li><span class="en">Led environmental consultancy mapping and optimal route selection.</span><span class="ar">قيادة خرائط الاستشارات البيئية واختيار المسارات المثلى.</span></li>
+          </ul>
+        </div>
+        <div class="job">
+          <span class="mono"><span class="en">Sep 2019 — May 2021</span><span class="ar">سبتمبر 2019 — مايو 2021</span></span>
+          <h3><span class="en">Survey Specialist &amp; Quantity Surveyor</span><span class="ar">أخصائي مساحة ومهندس كميات</span></h3>
+          <span class="where"><span class="en">Al Noor Company · Egypt</span><span class="ar">شركة النور · مصر</span></span>
+          <ul><li><span class="en">Directed surveying operations, the technical office, quantity surveying and cost estimates for construction projects.</span><span class="ar">إدارة أعمال المساحة والمكتب الفني وحصر الكميات وتقدير التكاليف لمشاريع الإنشاء.</span></li></ul>
+        </div>
+        <div class="job">
+          <span class="mono"><span class="en">Jul 2016 — Aug 2019</span><span class="ar">يوليو 2016 — أغسطس 2019</span></span>
+          <h3><span class="en">Survey Specialist &amp; Survey Consultant</span><span class="ar">أخصائي واستشاري مساحة</span></h3>
+          <span class="where"><span class="en">Seif Surveying Office · Capital AIC · Edmo · and others · Egypt</span><span class="ar">مكتب سيف للمساحة · كابيتال · إيدمو · وغيرها · مصر</span></span>
+          <ul><li><span class="en">Road, infrastructure and construction surveying, including Asyut Western Road, Abu Zenima–Gharandal Road and King Salman University networks.</span><span class="ar">رفع الطرق والبنية التحتية والإنشاءات، ومنها طريق أسيوط الغربي وطريق أبو زنيمة–غرندل وشبكات جامعة الملك سلمان.</span></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS + CREDENTIALS -->
+  <section id="credentials" class="full-only">
+    <div class="wrap">
+      <div class="sec-head"><span class="label"><span class="en">Toolkit</span><span class="ar">الأدوات</span></span><h2><span class="en">Tools &amp; credentials</span><span class="ar">الأدوات والمؤهلات</span></h2></div>
+      <div class="two">
+        <div class="toolgrid">
+          <div><h3><span class="en">Mobile mapping</span><span class="ar">المسح المتنقل</span></h3><div class="chips"><span>Trimble MX</span><span>Trimble Business Center</span><span>TopoDOT</span><span>Orbit 3D</span><span>MicroStation</span></div></div>
+          <div><h3>GIS</h3><div class="chips"><span>ArcGIS Pro</span><span>ArcScene</span><span>ArcGIS Server</span><span>GeoMedia</span><span>Global Mapper</span><span>Google Earth Pro</span><span>Python</span></div></div>
+          <div><h3><span class="en">CAD &amp; remote sensing</span><span class="ar">الرسم والاستشعار عن بعد</span></h3><div class="chips"><span>AutoCAD</span><span>Civil 3D</span><span>Revit models</span><span>ERDAS Imagine</span><span>Metashape</span></div></div>
+          <div><h3><span class="en">Data &amp; field</span><span class="ar">البيانات والميدان</span></h3><div class="chips"><span>PostgreSQL</span><span>SQL Server</span><span>GNSS / GPS</span><span>Total station</span><span>Level</span><span>Excel · PowerPoint</span></div></div>
+        </div>
+        <ul class="creds">
+          <li><div><b><span class="en">Remote Pilot Certificate (Drone) · Open Category</span><span class="ar">رخصة طيار عن بُعد (درون) · الفئة المفتوحة</span></b><small><span class="en">General Authority of Civil Aviation (GACA), Saudi Arabia · valid to May 2027</span><span class="ar">الهيئة العامة للطيران المدني · سارية حتى مايو 2027</span></small></div><span class="mono">2026</span></li>
+          <li><div><b><span class="en">Saudi Council of Engineers</span><span class="ar">الهيئة السعودية للمهندسين</span></b><small><span class="en">Member</span><span class="ar">عضو</span></small></div><span class="mono">SCE</span></li>
+          <li><div><b>Project Management Institute</b><small><span class="en">Member · PMP candidate · PMP Diploma (2025)</span><span class="ar">عضو · مرشح PMP · دبلوم إدارة المشاريع (2025)</span></small></div><span class="mono">PMI</span></li>
+          <li><div><b><span class="en">Advanced LiDAR &amp; 3D Point Cloud Applications</span><span class="ar">تطبيقات متقدمة لليدار وسحب النقاط</span></b><small>3D Tricks</small></div><span class="mono">2025</span></li>
+          <li><div><b><span class="en">Diploma in GIS</span><span class="ar">دبلوم نظم المعلومات الجغرافية</span></b><small><span class="en">Ain Shams University</span><span class="ar">جامعة عين شمس</span></small></div><span class="mono">2022</span></li>
+          <li><div><b><span class="en">ArcGIS Pro: Utility Networks, Spatial Analysis, Python</span><span class="ar">ArcGIS Pro: شبكات المرافق، التحليل المكاني، Python</span></b><small><span class="en">Plus photogrammetry, water network modelling, Civil 3D quantities</span><span class="ar">إضافة إلى التصوير الجوي ونمذجة شبكات المياه وكميات Civil 3D</span></small></div><span class="mono">GIS</span></li>
+          <li><div><b><span class="en">Training of Trainers (TOT) Diploma</span><span class="ar">دبلوم إعداد المدربين (TOT)</span></b><small><span class="en">Plus Effective Leaders Preparation Diploma</span><span class="ar">إضافة إلى دبلوم إعداد القادة</span></small></div><span class="mono">TOT</span></li>
+          <li><div><b><span class="en">B.A. Geography</span><span class="ar">بكالوريوس الجغرافيا</span></b><small><span class="en">Zagazig University</span><span class="ar">جامعة الزقازيق</span></small></div><span class="mono">2016</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <h2><span class="en">Have a survey, GIS or digital twin project?</span><span class="ar">لديك مشروع مساحة أو GIS أو توأم رقمي؟</span></h2>
+      <p><span class="en">Available for consulting, freelance delivery and project leadership in Saudi Arabia and remotely.</span><span class="ar">متاح للاستشارات والعمل الحر وقيادة المشاريع داخل السعودية وعن بُعد.</span></p>
+    </div>
+    <div class="clist">
+      <div><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/sameh-ayman-gis" target="_blank" rel="noopener">linkedin.com/in/sameh-ayman-gis</a></div>
+      <div><span class="label"><span class="en">Email</span><span class="ar">البريد</span></span><a href="mailto:samehayman.gis@gmail.com?subject=Project%20enquiry" target="_blank" rel="noopener">samehayman.gis@gmail.com</a></div>
+      <div><span class="label"><span class="en">Saudi Arabia · WhatsApp</span><span class="ar">السعودية · واتساب</span></span><a href="https://wa.me/966509703982?text=Hello%20Sameh%2C%20I%20saw%20your%20portfolio" target="_blank" rel="noopener" dir="ltr">+966 50 970 3982</a></div>
+      <div><span class="label"><span class="en">Egypt · WhatsApp</span><span class="ar">مصر · واتساب</span></span><a href="https://wa.me/201092253958?text=Hello%20Sameh%2C%20I%20saw%20your%20portfolio" target="_blank" rel="noopener" dir="ltr">+20 109 225 3958</a></div>
+      <div><span class="label"><span class="en">CV</span><span class="ar">السيرة الذاتية</span></span><a href="images/Sameh-Ayman-CV.pdf" target="_blank" rel="noopener" data-cv><span class="en">Download PDF</span><span class="ar">تحميل PDF</span></a></div>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><span>© 2026 Sameh Ayman Gadallh</span><span>WGS 84 · UTM 38N</span></div></footer>
+
+<script>
+(function(){
+  // language
+  var root=document.documentElement;
+  function setLang(l){root.dir=l==="ar"?"rtl":"ltr";root.lang=l;try{localStorage.setItem("lang",l)}catch(e){}}
+  var saved="en";try{saved=localStorage.getItem("lang")||"en"}catch(e){}
+  setLang(saved);
+  document.getElementById("langBtn").addEventListener("click",function(){setLang(root.dir==="rtl"?"en":"ar")});
+
+  // point cloud: synthetic road corridor with kerbs, poles and trees, coloured by elevation
+  var cv=document.getElementById("pc"),ctx=cv.getContext("2d"),pts=[];
+  function rnd(s){var x=Math.sin(s*127.1)*43758.5453;return x-Math.floor(x)}
+  var i=0;
+  for(var gx=-60;gx<=60;gx+=1.6){for(var gy=-40;gy<=40;gy+=1.6){
+    var jx=gx+(rnd(i++)-.5)*1.4, jy=gy+(rnd(i++)-.5)*1.4;
+    var road=Math.abs(jy-Math.sin(jx/22)*8);
+    var z=road<7?0:(road<8.5?.25:.3+Math.sin(jx/9)*.5+Math.cos(jy/7)*.6+rnd(i++)*.25);
+    pts.push([jx,jy,z]);
+  }}
+  for(var p=-54;p<=54;p+=18){var cy=Math.sin(p/22)*8;
+    for(var h=0;h<9;h+=.25){pts.push([p,cy+9.5,h]);} for(var a=0;a<3;a+=.3)pts.push([p+a*.6,cy+9.5-a,9]);
+    var tx=p+9,ty=cy-14;for(var t=0;t<70;t++){var r=rnd(i++)*3,an=rnd(i++)*6.28,hh=3+rnd(i++)*4;pts.push([tx+Math.cos(an)*r,ty+Math.sin(an)*r,hh]);}
+  }
+  function col(z){var s=[[43,89,195],[43,179,163],[155,211,74],[242,201,76],[226,87,43]],t=Math.max(0,Math.min(z/9,1))*4,k=Math.min(Math.floor(t),3),f=t-k,c0=s[k],c1=s[k+1];
+    return "rgb("+Math.round(c0[0]+(c1[0]-c0[0])*f)+","+Math.round(c0[1]+(c1[1]-c0[1])*f)+","+Math.round(c0[2]+(c1[2]-c0[2])*f)+")"}
+  pts.forEach(function(q){q.push(col(q[2]))});
+  var ang=.6,W,H,dpr;
+  function size(){dpr=Math.min(window.devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+  function draw(){
+    ctx.clearRect(0,0,W,H);var ca=Math.cos(ang),sa=Math.sin(ang),sc=W/150,list=[];
+    for(var n=0;n<pts.length;n++){var q=pts[n],x=q[0]*ca-q[1]*sa,y=q[0]*sa+q[1]*ca;list.push([W/2+x*sc,H*.56+y*sc*.45-q[2]*sc*1.6,y,q[3]])}
+    list.sort(function(a,b){return a[2]-b[2]});
+    for(var m=0;m<list.length;m++){ctx.fillStyle=list[m][3];ctx.fillRect(list[m][0],list[m][1],1.6,1.6)}
+  }
+  size();draw();
+  window.addEventListener("resize",function(){size();draw()});
+  var still=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!still){(function loop(){ang+=.0016;draw();requestAnimationFrame(loop)})()}
+  if(still){document.querySelectorAll(".reel video").forEach(function(rv){rv.removeAttribute("autoplay");rv.pause()})}
+
+  // quick / full view
+  var body=document.documentElement;
+  function loadVideos(){document.querySelectorAll(".full-only video[data-src]").forEach(function(vd){vd.src=vd.getAttribute("data-src");vd.removeAttribute("data-src");if(still){vd.removeAttribute("autoplay")}})}
+  function setMode(m){
+    body.classList.toggle("v-full",m==="full");body.classList.toggle("v-short",m!=="full");
+    document.querySelectorAll(".mode button").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-mode")===m?"true":"false")});
+    if(m==="full")loadVideos();
+  }
+  function inFull(id){var el=id&&document.getElementById(id);return !!(el&&el.closest(".full-only"))}
+  var h=location.hash.replace("#","");
+  setMode(h==="full"||inFull(h)?"full":"short");
+  if(inFull(h)){setTimeout(function(){var el=document.getElementById(h);if(el)el.scrollIntoView()},50)}
+  document.querySelectorAll(".mode button").forEach(function(b){b.addEventListener("click",function(){
+    var m=b.getAttribute("data-mode");setMode(m);
+    try{history.replaceState(null,"",m==="full"?"#full":location.pathname+location.search)}catch(e){}
+    (m==="full"?document.getElementById("about"):document.getElementById("featured")).scrollIntoView({behavior:still?"auto":"smooth"});
+  })});
+  document.querySelectorAll("[data-go-full]").forEach(function(b){b.addEventListener("click",function(){
+    setMode("full");try{history.replaceState(null,"","#full")}catch(e){}
+    document.getElementById("about").scrollIntoView({behavior:still?"auto":"smooth"});
+  })});
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener("click",function(e){
+    var id=a.getAttribute("href").slice(1);
+    if(inFull(id)&&!body.classList.contains("v-full")){e.preventDefault();setMode("full");document.getElementById(id).scrollIntoView({behavior:still?"auto":"smooth"})}
+  })});
+
+  // CV download through the viewer's save prompt (falls back to opening the PDF)
+  document.querySelectorAll("[data-cv]").forEach(function(a){a.addEventListener("click",function(e){
+    if(!window.claude||!claude.use)return;
+    e.preventDefault();
+    claude.use("downloads").then(function(dl){
+      if(!dl){window.open(a.href,"_blank","noopener");return}
+      return fetch(a.getAttribute("href")).then(function(r){return r.blob()}).then(function(b){return dl.save({filename:"Sameh-Ayman-CV.pdf",data:b})})
+        .catch(function(err){if(!err||err.code!=="declined"){window.open(a.href,"_blank","noopener")}});
+    });
+  })});
+  // image viewer
+  var v=document.createElement("div");v.className="viewer";v.hidden=true;v.innerHTML='<button type="button" id="vClose">Close ✕</button><div><img alt=""><p></p></div>';document.body.appendChild(v);
+  var vi=v.querySelector("img"),vp=v.querySelector("p");
+  document.querySelectorAll(".shot img").forEach(function(im){im.addEventListener("click",function(){vi.src=im.src;vi.alt=im.alt;var c=im.parentNode.querySelector("figcaption");vp.textContent=c?c.textContent:"";v.hidden=false})});
+  v.addEventListener("click",function(){v.hidden=true});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")v.hidden=true});
+})();
+</script>
