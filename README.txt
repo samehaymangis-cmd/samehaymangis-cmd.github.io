@@ -3,7 +3,7 @@
 Open index.html in any browser to view the site offline.
 لعرض الموقع بدون إنترنت: افتح index.html بأي متصفح (يجب أن يبقى مجلد images بجانبه).
 
-Live version / النسخة المنشورة: https://claude.ai/artifact/HertyKvBZpBv8cJVmccJZr
+Live version / النسخة المنشورة: https://samehaymangis-cmd.github.io/
 
 To publish under your own name: upload this whole folder (index.html + images) to
 GitHub Pages, Netlify or any web host. No build step is needed.
